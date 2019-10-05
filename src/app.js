@@ -1,6 +1,14 @@
 import React from "react"
 
-export default () =>
+export default props =>
   <div>
-    Recipes
+    {
+      props.data.map((datum, i) =>
+        <div key={ i }>
+          {
+            datum.name
+          }
+        </div>
+      )
+    }
   </div>
