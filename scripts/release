@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eo pipefail
+
+DIST_DIR="dist"
+ARTIFACTS_DIR="artifacts"
+
+echo "Building"
+npm run build
+
+echo "Packaging"
+mkdir "${ARTIFACTS_DIR}"
+cd "${DIST_DIR}"
+echo {\"branch\": \"$TRAVIS_BRANCH\", \"commit\": \"$TRAVIS_COMMIT\", \"build\": $TRAVIS_BUILD_NUMBER} > build.json
+tar czvf "../${ARTIFACTS_DIR}/git-json-cms-frontend-${TRAVIS_BRANCH}.tar.gz" *

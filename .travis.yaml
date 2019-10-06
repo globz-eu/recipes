@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - '12.11.0'
+
+script: npm run release
+
+deploy:
+  provider: releases
+  file_glob: true
+  file: artifacts/*
+  skip_cleanup: true
+  on:
+    repo: gloz-eu/recipes
+    tags: true
