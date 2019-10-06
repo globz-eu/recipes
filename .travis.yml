@@ -10,5 +10,5 @@ deploy:
   file: artifacts/*
   skip_cleanup: true
   on:
-    repo: gloz-eu/recipes
+    repo: globz-eu/recipes
     tags: true
