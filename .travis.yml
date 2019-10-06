@@ -6,9 +6,12 @@ script: npm run release
 
 deploy:
   provider: releases
+  api_key:
+    secure: VamQkM9JYMkmqzE61RqAEPWkEVfrQPBH2m2y2tRwAqz0rzkk91NKi90jYpOXW4pW+OTifRAuHNkVFfSHEWsFuGg2UhKBX+9X1cP80UBAbwzn8+Cqb/lZXj16tSmqZu1S6yWzD/Ne1JhgwYqqyn24QF5EpKyGGciSfY+0Cj1UnJm+4NPS4w9MuHdz6u7XeHA/gqkrYqClx7z8GLEwZGVgmFZ/iBQKOjOcpJmU4lyEV1buG0j7eedoBct6LPYfCQqlxvjt/dz9+r5bSXqDT5TtJ0ajUIb5Nbzmxz24Co3HMBz5pDDqo3EzLUp4DY0eQ3Ics8kk1UQw3yTpVLsqL1330vWW53pKiEEIe1Wzd9DDlobob4Fxx5VXMM/njmkMlifP8z6GuRNuV2p/dy/a3sDmLQ9TEvPxDtodBZg2OojpF4vHnDh+1RUh2sGO6jJOrwdyef/m1hKV+VFnsBLxxuR6alSMM69TEbmrQVlt12PfTF/dq/n6UwKnI4XaxvHFpC8/TOM68e6eAenzufiYQOTwrc+SjwzhfCftR7mgRX7dc7MBpuy+b0Lhk79/RimV7roZbnaNyYoxoyx7V2EjVlxOefO7Xhf5SeVf9y1OVCKb+77EVFxGF3XZWNW1lISrhuwgk44o+kyC2JnsuDSWRrSlkFSkXcy8IgM33KV4S6Og9QQ=
   file_glob: true
   file: artifacts/*
   skip_cleanup: true
   on:
     repo: globz-eu/recipes
     tags: true
+
