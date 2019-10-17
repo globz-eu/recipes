@@ -6,7 +6,7 @@ import App from "./app"
 async function render() {
   const configResponse = await axios.get("config.json")
   const config = configResponse.data
-  const response = await axios.get(`${config.backend}/recipes`).catch(error => new Error(error))
+  const response = await axios.get(`http://${config.backend}/recipes`).catch(error => new Error(error))
   if (response instanceof Error) {
     console.error(response)
   } else {
