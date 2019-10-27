@@ -6,6 +6,9 @@ jobs:
   include:
     - stage: test
     script: npm test
+    on:
+      repo: globz-eu/recipes
+      tags: true
 
     - stage: deploy
     script: npm run releases
