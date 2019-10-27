@@ -4,10 +4,10 @@ node_js:
 
 jobs:
   include:
-    -stage: test
+    - stage: test
     script: npm test
 
-    -stage: deploy
+    - stage: deploy
     script: npm run releases
     provider: releases
     api_key:
