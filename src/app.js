@@ -1,14 +1,11 @@
 import React from "react"
+import Title from "./components/title"
 
 export default props =>
   <div>
     {
       props.data.map((datum, i) =>
-        <div key={ i }>
-          {
-            datum.name
-          }
-        </div>
+        <Title key={ i } title={ datum.name } />
       )
     }
   </div>

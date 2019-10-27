@@ -1,4 +1,4 @@
 node_modules
 dist
-recipes.*
+recipes-sample.*
 coverage
