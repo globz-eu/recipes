@@ -9,7 +9,8 @@
     "build": "webpack --env.production",
     "release": "./scripts/release",
     "watch": "webpack-dev-server --env.development",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "testAndWatch": "jest --watch"
   },
   "engines": {
     "node": "12.11.0"

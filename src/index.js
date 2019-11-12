@@ -2,6 +2,7 @@ import axios from "axios"
 import React from "react"
 import ReactDOM from "react-dom"
 import App from "./app"
+import processData from "./helpers"
 
 async function render() {
   const configResponse = await axios.get("config.json")
@@ -10,8 +11,9 @@ async function render() {
   if (response instanceof Error) {
     console.error(response)
   } else {
+    console.log(processData(response.data))
     ReactDOM.render(
-      <App data={ response.data } />,
+      <App data={ processData(response.data) } />,
       document.getElementById("app")
     )
   }

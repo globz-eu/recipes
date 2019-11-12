@@ -1,12 +1,12 @@
 [
   {
     "name": "Lekker",
-    "servings": 3,
+    "for_persons": 3,
     "instructions": "Stir well"
   },
   {
     "name": "Pas mal",
-    "servings": 2,
+    "for_persons": 2,
     "instructions": "Servir sur un lit de choucroute"
   }
 ]
