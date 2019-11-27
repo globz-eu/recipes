@@ -1,4 +1,4 @@
-import Servings from "../src/components/servings"
+import Servings from "../../src/components/servings"
 
 test('Servings component displays servings number', () => {
     const servings = shallow(<Servings servings={ 3 } />)
