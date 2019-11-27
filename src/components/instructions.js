@@ -1,4 +1,4 @@
 import React from "react"
 
 export default props =>
-  <div>Intructions: <br/>{ props.instructions }</div>
+  <div>Instructions: <br/>{ props.instructions }</div>
