@@ -10,21 +10,7 @@ module.exports = (env = {}) => ({
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              ["@babel/preset-env", {
-                targets: { chrome: "76" },
-                useBuiltIns: "usage",
-                corejs: 3,
-                modules: false
-              }],
-              "@babel/preset-react"
-            ],
-            plugins: ["@babel/plugin-proposal-object-rest-spread"]
-          }
-        }
+        loader: "babel-loader"
       }
     ]
   },
