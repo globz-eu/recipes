@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react"
 import Instructions from "./components/instructions"
 import Servings from "./components/servings"
 import Title from "./components/title"
-import { getData } from "./helpers"
+import updateData from "./updateData"
 
 export default function App() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    getData(setData)
+    updateData(setData)
   }, ["config.json"])
 
   return (

@@ -1,10 +1,15 @@
 import axios from "axios"
 
-export async function getData(setData) {
+export default async function updateData(setData) {
+  const data = await getData()
+  console.log(data)
+  setData(data)
+}
+
+export async function getData() {
   const config = await getFromUrl("config.json")
   const response = await getFromUrl(config.backend)
-  console.log(response)
-  setData(response)
+  return response
 }
 
 export async function getFromUrl(url) {
