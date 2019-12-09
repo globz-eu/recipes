@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Instructions from "./components/instructions"
 import Servings from "./components/servings"
 import Title from "./components/title"
@@ -7,7 +7,7 @@ import updateData from "./updateData"
 export default function App() {
   const [data, setData] = useState(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     updateData(setData)
   }, ["config.json"])
 

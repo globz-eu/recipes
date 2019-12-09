@@ -1,28 +1,55 @@
+import React from "react"
 import App from "../src/app"
 import Instructions from "../src/components/instructions"
 import Servings from "../src/components/servings"
 import Title from "../src/components/title"
 import testRecipes from "../testData/recipes.json"
-import updateData from "../src/updateData"
 
-jest.mock("updateData")
+jest.mock("../src/updateData")
 
 describe("App", () => {
-  it("title components have expected title", () => {
-    const app = shallow(<App />)
-    const titles = app.find(Title)
-    titles.map((title, i) => expect(title).toHaveProp('title', testRecipes[i].name))
+  let app
+  let useEffect
+
+  const mockUseEffect = () => {
+    useEffect.mockImplementationOnce(f => f())
+  }
+
+  beforeEach(() => {
+    useEffect = jest.spyOn(React, "useEffect")
+
+    mockUseEffect()
+    app = shallow(<App />)
+  })
+
+  it("contains the expected number of Title components", () => {
+    expect(app).toContainMatchingElements(testRecipes.length, Title)
+  })
+
+  it("Title components have the expected title prop", () => {
+    
+    testRecipes.forEach((recipe, i) => {
+      expect(app.find(Title).get(i).props.title).toEqual(recipe.name)
+    })
+  })
+
+  it("contains the expected number of Servings components", () => {
+    expect(app).toContainMatchingElements(testRecipes.length, Servings)
+  })
+
+  it("Servings components have the expected servings prop", () => {
+    testRecipes.forEach((recipe, i) => {
+      expect(app.find(Servings).get(i).props.servings).toEqual(recipe.servings)
+    })
+  })
+
+  it("contains the expected number of Instructions components", () => {
+    expect(app).toContainMatchingElements(testRecipes.length, Instructions)
   })
   
-  it("servings components have expected content", () => {
-    const app = shallow(<App />)
-    const servings = app.find(Servings)
-    servings.map((serving, i) => expect(serving).toHaveProp('servings', testRecipes[i].servings))
-  })
-  
-  it("instructions components have expected content", () => {
-    const app = shallow(<App />)
-    const instructions = app.find(Instructions)
-    instructions.map((instruction, i) => expect(instruction).toHaveProp('instructions', testRecipes[i].instructions))
+  it("Instructions components have the expected instructions prop", () => {
+    testRecipes.forEach((recipe, i) => {
+      expect(app.find(Instructions).get(i).props.instructions).toEqual(recipe.instructions)
+    })
   })
 })
