@@ -3,8 +3,13 @@
   "env": {
     "jest/globals": true
   },
-  "extends": ["plugin:jest/recommended"],
+  "extends": ["plugin:jest/recommended", "artcom-react"],
   "rules": {
     "import/no-commonjs": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

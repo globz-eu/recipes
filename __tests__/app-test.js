@@ -1,3 +1,4 @@
+import { shallow } from "enzyme"
 import React from "react"
 import App from "../src/app"
 import Instructions from "../src/components/instructions"
@@ -27,7 +28,6 @@ describe("App", () => {
   })
 
   it("Title components have the expected title prop", () => {
-    
     testRecipes.forEach((recipe, i) => {
       expect(app.find(Title).get(i).props.title).toEqual(recipe.name)
     })
@@ -46,7 +46,7 @@ describe("App", () => {
   it("contains the expected number of Instructions components", () => {
     expect(app).toContainMatchingElements(testRecipes.length, Instructions)
   })
-  
+
   it("Instructions components have the expected instructions prop", () => {
     testRecipes.forEach((recipe, i) => {
       expect(app.find(Instructions).get(i).props.instructions).toEqual(recipe.instructions)

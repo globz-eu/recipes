@@ -1,6 +1,8 @@
+import { shallow } from "enzyme"
+import React from "react"
 import Title from "../../src/components/title"
 
-test('Title component displays title text', () => {
-    const title = shallow(<Title title="Recipe Title" />)
-    expect(title).toHaveText("Recipe Title")
+test("Title component displays title text", () => {
+  const title = shallow(<Title title="Recipe Title" />)
+  expect(title).toHaveText("Recipe Title")
 })

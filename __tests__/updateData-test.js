@@ -7,14 +7,14 @@ describe("getFromUrl", () => {
     const config = { backend: "http://localhost:8080/recipes" }
     axios.get = jest.fn().mockResolvedValue({ data: config })
   })
-  
+
   it("returns the correct data", async () => {
     const config = { backend: "http://localhost:8080/recipes" }
     const response = await getFromUrl("config.json")
     expect(response).toEqual(config)
     expect(axios.get).toBeCalledWith("config.json")
   })
-  
+
   it("catches errors", async () => {
     axios.get.mockRejectedValue()
     const response = await getFromUrl("config.json")
