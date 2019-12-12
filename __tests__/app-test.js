@@ -1,7 +1,7 @@
 import { shallow } from "enzyme"
 import React from "react"
 import App from "../src/app"
-import Instructions from "../src/components/instructions"
+import InstructionsBlock from "../src/components/instructionsBlock"
 import Servings from "../src/components/servings"
 import Title from "../src/components/title"
 import testRecipes from "../testData/recipes.json"
@@ -43,13 +43,13 @@ describe("App", () => {
     })
   })
 
-  it("contains the expected number of Instructions components", () => {
-    expect(app).toContainMatchingElements(testRecipes.length, Instructions)
+  it("contains the expected number of InstructionsBlock components", () => {
+    expect(app).toContainMatchingElements(testRecipes.length, InstructionsBlock)
   })
 
-  it("Instructions components have the expected instructions prop", () => {
+  it("InstructionsBlock components have the expected instructionsBlock prop", () => {
     testRecipes.forEach((recipe, i) => {
-      expect(app.find(Instructions).get(i).props.instructions).toEqual(recipe.instructions)
+      expect(app.find(InstructionsBlock).get(i).props.instructions).toEqual(recipe.instructions)
     })
   })
 })

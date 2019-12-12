@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Instructions from "./components/instructions"
+import InstructionsBlock from "./components/instructionsBlock"
 import Servings from "./components/servings"
 import Title from "./components/title"
 import updateData from "./updateData"
@@ -18,7 +18,7 @@ export default function App() {
           <div key={ i }>
             <Title title={ datum.name } />
             <Servings servings={ datum.servings } />
-            <Instructions instructions={ datum.instructions } />
+            <InstructionsBlock instructions={ datum.instructions } />
           </div>
         )
       }

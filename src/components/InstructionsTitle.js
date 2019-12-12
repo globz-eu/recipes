@@ -2,5 +2,5 @@ import styled from "styled-components"
 
 export default styled.div`
   padding: 1em;
-  font-size: 1em;
+  font-size: 1.2em;
 `
