@@ -1,9 +1,7 @@
 import { shallow } from "enzyme"
 import React from "react"
 import App from "../src/app"
-import InstructionsBlock from "../src/components/instructionsBlock"
-import Servings from "../src/components/servings"
-import Title from "../src/components/title"
+import Recipe from "../src/components/recipe"
 import testRecipes from "../testData/recipes.json"
 
 jest.mock("../src/updateData")
@@ -23,33 +21,25 @@ describe("App", () => {
     app = shallow(<App />)
   })
 
-  it("contains the expected number of Title components", () => {
-    expect(app).toContainMatchingElements(testRecipes.length, Title)
+  it("contains the expected number of Recipe components", () => {
+    expect(app).toContainMatchingElements(testRecipes.length, Recipe)
   })
 
-  it("Title components have the expected title prop", () => {
+  it("Recipe components have the expected title prop", () => {
     testRecipes.forEach((recipe, i) => {
-      expect(app.find(Title).get(i).props.title).toEqual(recipe.name)
+      expect(app.find(Recipe).get(i).props.title).toEqual(recipe.name)
     })
   })
 
-  it("contains the expected number of Servings components", () => {
-    expect(app).toContainMatchingElements(testRecipes.length, Servings)
-  })
-
-  it("Servings components have the expected servings prop", () => {
+  it("Recipe components have the expected servings prop", () => {
     testRecipes.forEach((recipe, i) => {
-      expect(app.find(Servings).get(i).props.servings).toEqual(recipe.servings)
+      expect(app.find(Recipe).get(i).props.servings).toEqual(recipe.servings)
     })
   })
 
-  it("contains the expected number of InstructionsBlock components", () => {
-    expect(app).toContainMatchingElements(testRecipes.length, InstructionsBlock)
-  })
-
-  it("InstructionsBlock components have the expected instructionsBlock prop", () => {
+  it("Recipe components have the expected instructions prop", () => {
     testRecipes.forEach((recipe, i) => {
-      expect(app.find(InstructionsBlock).get(i).props.instructions).toEqual(recipe.instructions)
+      expect(app.find(Recipe).get(i).props.instructions).toEqual(recipe.instructions)
     })
   })
 })

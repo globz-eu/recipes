@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import InstructionsBlock from "./components/instructionsBlock"
-import Servings from "./components/servings"
-import Title from "./components/title"
+import Recipe from "./components/recipe"
 import updateData from "./updateData"
 
 export default function App() {
@@ -15,11 +13,11 @@ export default function App() {
     <div>
       {
         data && data.map((datum, i) =>
-          <div key={ i }>
-            <Title title={ datum.name } />
-            <Servings servings={ datum.servings } />
-            <InstructionsBlock instructions={ datum.instructions } />
-          </div>
+          <Recipe
+            key={ i }
+            title={ datum.name }
+            servings={ datum.servings }
+            instructions={ datum.instructions } />
         )
       }
     </div>

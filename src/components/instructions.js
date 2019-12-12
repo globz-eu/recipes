@@ -1,6 +1,11 @@
-import styled from "styled-components"
+import React from "react"
+import Instructions from "./instructionsText"
+import InstructionsTitle from "./InstructionsTitle"
 
-export default styled.div`
-  padding: 1em;
-  font-size: 1em;
-`
+export default props =>
+  <div>
+    <InstructionsTitle>Instructions:</InstructionsTitle>
+    <Instructions>
+      { props.instructions }
+    </Instructions>
+  </div>
