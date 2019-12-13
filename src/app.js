@@ -49,7 +49,6 @@ export default function App() {
           <button type="submit">Submit</button>
         </div>
       </form>
-
     </div>
   )
 }
