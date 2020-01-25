@@ -1,7 +1,9 @@
 import React, { useState } from "react"
+import { submitRecipe } from "./handlers"
+import updateData from "./updateData"
 import Recipe from "./components/recipe"
 import RecipeForm from "./components/recipeForm"
-import updateData from "./updateData"
+
 
 export default () => {
   const [data, setData] = useState(null)
@@ -10,12 +12,10 @@ export default () => {
     updateData(setData)
   }, ["config.json"])
 
-  const submit = inputs => console.log(`${inputs.title} ${inputs.servings} ${inputs.instructions}`)
-
   return (
     <div>
       {
-        data && data.map((datum, i) =>
+        data && data.recipes.map((datum, i) =>
           <Recipe
             key={ i }
             title={ datum.name }
@@ -23,7 +23,9 @@ export default () => {
             instructions={ datum.instructions } />
         )
       }
-      <RecipeForm submit={ submit } />
+      {
+        data && <RecipeForm submit={ submitRecipe } backend={ data.config.backend } />
+      }
     </div>
   )
 }

@@ -2,11 +2,11 @@ import React from "react"
 import useForm from "../formHook"
 import { handleSubmit } from "../handlers"
 
-export default ({ submit }) => {
+export default ({ submit, backend }) => {
   const { inputs, handleInputChange } = useForm()
 
   return (
-    <form onSubmit={ event => handleSubmit(event, inputs, submit) }>
+    <form onSubmit={ event => handleSubmit(event, inputs, submit, backend) }>
       <div>
         <label>Title</label>
         <input

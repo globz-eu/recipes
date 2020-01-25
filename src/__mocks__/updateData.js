@@ -7,6 +7,6 @@ export default async function updateData(setData) {
 
 async function getData() {
   return new Promise(resolve => {
-    resolve(testRecipes)
+    resolve({ recipes: testRecipes, config: { backend: "http://127.0.0.1:8000/recipes" } })
   })
 }

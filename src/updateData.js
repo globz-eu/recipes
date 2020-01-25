@@ -9,7 +9,7 @@ export default async function updateData(setData) {
 export async function getData() {
   const config = await getFromUrl("config.json")
   const response = await getFromUrl(config.backend)
-  return response
+  return { config, recipes: response }
 }
 
 export async function getFromUrl(url) {
