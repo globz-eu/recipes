@@ -1,4 +1,4 @@
-export function submit(event, inputs, callback) {
+export function handleSubmit(event, inputs, callback) {
   if (event) {
     event.preventDefault()
   }

@@ -1,11 +1,12 @@
 import React from "react"
 import useForm from "../formHook"
+import { handleSubmit } from "../handlers"
 
 export default ({ submit }) => {
-  const { inputs, handleInputChange, handleSubmit } = useForm(submit)
+  const { inputs, handleInputChange } = useForm()
 
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={ event => handleSubmit(event, inputs, submit) }>
       <div>
         <label>Title</label>
         <input

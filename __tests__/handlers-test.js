@@ -1,4 +1,4 @@
-import { submit, inputChange } from "../src/handlers"
+import { handleSubmit, inputChange } from "../src/handlers"
 
 describe("submit", () => {
   let event
@@ -12,18 +12,18 @@ describe("submit", () => {
   })
 
   it("should prevent event default when there is an event", () => {
-    submit(event, inputs, callback)
+    handleSubmit(event, inputs, callback)
     expect(event.preventDefault.mock.calls.length).toBe(1)
   })
 
   it("should call callback with inputs when there is an event", () => {
-    submit(event, inputs, callback)
+    handleSubmit(event, inputs, callback)
     expect(callback.mock.calls[0][0]).toBe(inputs)
   })
 
-  it("should call call callback even when there is no event", () => {
+  it("should call callback even when there is no event", () => {
     event = null
-    submit(event, inputs, callback)
+    handleSubmit(event, inputs, callback)
     expect(callback.mock.calls[0][0]).toBe(inputs)
   })
 })
