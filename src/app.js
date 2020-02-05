@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { submitRecipe } from "./handlers"
 import updateData from "./updateData"
 import Recipe from "./components/recipe"
 import RecipeForm from "./components/recipeForm"
@@ -24,7 +23,7 @@ export default () => {
         )
       }
       {
-        data && <RecipeForm submit={ submitRecipe } backend={ data.config.backend } />
+        data && <RecipeForm updateData={ () => updateData(setData) } backend={ data.config.backend } />
       }
     </div>
   )

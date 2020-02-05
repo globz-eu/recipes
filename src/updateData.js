@@ -1,4 +1,4 @@
-import axios from "axios"
+import { getFromUrl } from "./requests"
 
 export default async function updateData(setData) {
   const data = await getData()
@@ -10,13 +10,4 @@ export async function getData() {
   const config = await getFromUrl("config.json")
   const response = await getFromUrl(config.backend)
   return { config, recipes: response }
-}
-
-export async function getFromUrl(url) {
-  const response = await axios.get(url).catch(error => new Error(error))
-  if (response instanceof Error) {
-    console.error(response)
-    return null
-  }
-  return response.data
 }

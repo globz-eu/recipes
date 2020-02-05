@@ -2,18 +2,18 @@ import React from "react"
 import useForm from "../formHook"
 import { handleSubmit } from "../handlers"
 
-export default ({ submit, backend }) => {
-  const { inputs, handleInputChange } = useForm()
+export default ({ updateData, backend }) => {
+  const { inputs, setInputs, handleInputChange } = useForm()
 
   return (
-    <form onSubmit={ event => handleSubmit(event, inputs, submit, backend) }>
+    <form onSubmit={ event => handleSubmit(event, inputs, setInputs, backend, updateData) }>
       <div>
         <label>Title</label>
         <input
           type="text"
-          name="title"
+          name="name"
           onChange={ handleInputChange }
-          value={ inputs.title || "" }
+          value={ inputs.name || "" }
           required />
         <label>Servings</label>
         <input

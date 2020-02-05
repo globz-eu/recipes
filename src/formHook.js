@@ -7,6 +7,7 @@ export default () => {
 
   return {
     handleInputChange,
-    inputs
+    inputs,
+    setInputs
   }
 }
