@@ -1,30 +1,46 @@
+import axios from "axios"
 import { handleSubmit, inputChange } from "../src/handlers"
 
 describe("submit", () => {
   let event
-  let callback
-  let inputs
+  let setInputs
+  let updateData
+  const inputs = { inputName: "input" }
+  const backend = "http://127.0.0.1:8080/recipes/"
 
   beforeEach(() => {
     event = { preventDefault: jest.fn() }
-    callback = jest.fn()
-    inputs = { inputName: "input" }
+    setInputs = jest.fn()
+    updateData = jest.fn()
+    axios.post = jest.fn().mockResolvedValue({})
   })
 
-  it("should prevent event default when there is an event", () => {
-    handleSubmit(event, inputs, callback)
+  it("should prevent event default when there is an event", async () => {
+    await handleSubmit(event, inputs, setInputs, backend, updateData)
     expect(event.preventDefault.mock.calls.length).toBe(1)
   })
 
-  it("should call callback with inputs when there is an event", () => {
-    handleSubmit(event, inputs, callback)
-    expect(callback.mock.calls[0][0]).toBe(inputs)
+  it("should post data to backend", async () => {
+    await handleSubmit(event, inputs, setInputs, backend, updateData)
+    expect(axios.post.mock.calls[0][0]).toEqual(backend, inputs)
   })
 
-  it("should call callback even when there is no event", () => {
+  it("should reset inputs", async () => {
+    await handleSubmit(event, inputs, setInputs, backend, updateData)
+    expect(setInputs.mock.calls[0][0]).toEqual({})
+  })
+
+  it("should update data", async () => {
+    await handleSubmit(event, inputs, setInputs, backend, updateData)
+    expect(updateData.mock.calls.length).toBe(1)
+  })
+
+  it("should handle submit even when there is no event", async () => {
     event = null
-    handleSubmit(event, inputs, callback)
-    expect(callback.mock.calls[0][0]).toBe(inputs)
+    await handleSubmit(event, inputs, setInputs, backend, updateData)
+    expect(axios.post.mock.calls[0][0]).toEqual(backend, inputs)
+    expect(setInputs.mock.calls[0][0]).toEqual({})
+    expect(updateData.mock.calls.length).toBe(1)
   })
 })
 
