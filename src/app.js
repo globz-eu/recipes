@@ -23,7 +23,10 @@ export default () => {
         )
       }
       {
-        data && <RecipeForm updateData={ () => updateData(setData) } backend={ data.config.backend } />
+        data &&
+        <RecipeForm
+          updateData={ () => updateData(setData) }
+          backend={ data.config.backend } />
       }
     </div>
   )
