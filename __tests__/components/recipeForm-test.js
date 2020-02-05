@@ -4,8 +4,9 @@ import RecipeForm from "../../src/components/recipeForm"
 
 describe("RecipeForm", () => {
   it("contains the expected elements", () => {
-    const submit = jest.fn()
-    const recipeForm = shallow(<RecipeForm submit={ submit } />)
+    const updateData = jest.fn()
+    const backend = "http://127.0.0.1:8080/recipes/"
+    const recipeForm = shallow(<RecipeForm updateData={ updateData } backend={ backend } />)
     expect(recipeForm.find("input").at(0).prop("name")).toEqual("title")
     expect(recipeForm.find("input").at(1).prop("name")).toEqual("servings")
     expect(recipeForm.find("input").at(2).prop("name")).toEqual("instructions")
