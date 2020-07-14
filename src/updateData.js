@@ -8,6 +8,10 @@ export default async function updateData(setData) {
 
 export async function getData() {
   const config = await getFromUrl("config.json")
+  if (config.backend === "local") {
+    const response = await getFromUrl("data/recipes.json")
+    return { config, recipes: response }
+  }
   const response = await getFromUrl(config.backend)
   return { config, recipes: response }
 }
