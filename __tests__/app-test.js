@@ -2,6 +2,7 @@ import { shallow } from "enzyme"
 import React from "react"
 import App from "../src/app"
 import Recipe from "../src/components/recipe"
+import RecipeForm from "../src/components/recipeForm"
 import testRecipes from "../testData/recipes.json"
 
 jest.mock("../src/updateData")
@@ -41,5 +42,9 @@ describe("App", () => {
     testRecipes.forEach((recipe, i) => {
       expect(app.find(Recipe).get(i).props.instructions).toEqual(recipe.instructions)
     })
+  })
+
+  it("contains a RecipeForm", () => {
+    expect(app).toContainMatchingElements(1, RecipeForm)
   })
 })
