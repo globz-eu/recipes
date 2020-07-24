@@ -1,8 +1,10 @@
-import { shallow } from "enzyme"
+import "@testing-library/jest-dom"
+import { render, screen } from "@testing-library/react"
 import React from "react"
 import Title from "../../src/components/title"
 
 test("Title component displays title text", () => {
-  const title = shallow(<Title title="Recipe Title" />)
-  expect(title).toHaveText("Recipe Title")
+  const testTitle = "Recipe Title"
+  render(<Title title={ testTitle } />)
+  expect(screen.getByText(testTitle)).toBeInTheDocument()
 })
