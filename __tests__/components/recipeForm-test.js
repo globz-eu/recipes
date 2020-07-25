@@ -1,33 +1,28 @@
-import axios from "axios"
-import { shallow } from "enzyme"
+import { render, fireEvent, screen } from "@testing-library/react"
 import React from "react"
+import { rest } from "msw"
+import { setupServer } from "msw/node"
 import RecipeForm from "../../src/components/recipeForm"
 
 describe("RecipeForm", () => {
   it("contains the expected elements", () => {
-    const updateData = jest.fn()
-    const backend = "http://127.0.0.1:8080/recipes/"
-    const recipeForm = shallow(<RecipeForm updateData={ updateData } backend={ backend } />)
-    expect(recipeForm.find("input").at(0).prop("name")).toEqual("name")
-    expect(recipeForm.find("input").at(1).prop("name")).toEqual("servings")
-    expect(recipeForm.find("input").at(2).prop("name")).toEqual("instructions")
+    const backend = "http://recipes.com/api/recipes/"
+    render(<RecipeForm updateData={ () => {} } backend={ backend } />)
+    expect(screen.getByLabelText("Title")).toBeInTheDocument()
+    expect(screen.getByLabelText("Servings")).toBeInTheDocument()
+    expect(screen.getByLabelText("Instructions")).toBeInTheDocument()
   })
 
-  it("submits the expected data", () => {
+  it("contains the expected data", async () => {
+    const backend = "http://recipes.com/api/recipes/"
     const updateData = jest.fn()
-    const backend = "http://127.0.0.1:8080/recipes/"
-    axios.post = jest.fn().mockResolvedValue({})
-    const persist = jest.fn()
-    const recipeForm = shallow(<RecipeForm updateData={ updateData } backend={ backend } />)
-    recipeForm.find("input").at(0)
-      .simulate("change", { target: { name: "title", value: "Lekker" }, persist })
-    recipeForm.find("input").at(1)
-      .simulate("change", { target: { name: "servings", value: 4 }, persist })
-    recipeForm.find("input").at(2)
-      .simulate("change", { target: { name: "instructions", value: "Stir well" }, persist })
-    recipeForm.find("form").at(0).simulate("submit")
-    expect(axios.post.mock.calls.length).toBe(1)
-    expect(axios.post.mock.calls[0][0])
-      .toEqual(backend, { title: "Lekker", servings: 4, instructions: "Stir well" })
+    render(<RecipeForm updateData={ updateData } backend={ backend } />)
+
+    fireEvent.change(screen.getByLabelText("Title"), { target: { value: "Lekker" } })
+    fireEvent.change(screen.getByLabelText("Servings"), { target: { value: 4 } })
+    fireEvent.change(screen.getByLabelText("Instructions"), { target: { value: "Stir well" } })
+    expect(screen.getByLabelText("Title")).toHaveValue("Lekker")
+    expect(screen.getByLabelText("Servings")).toHaveValue(4)
+    expect(screen.getByLabelText("Instructions")).toHaveValue("Stir well")
   })
 })

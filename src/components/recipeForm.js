@@ -8,23 +8,26 @@ export default ({ updateData, backend }) => {
   return (
     <form onSubmit={ event => handleSubmit(event, inputs, setInputs, backend, updateData) }>
       <div>
-        <label>Title</label>
+        <label id="recipe-name">Title</label>
         <input
           type="text"
+          aria-labelledby="recipe-name"
           name="name"
           onChange={ handleInputChange }
           value={ inputs.name || "" }
           required />
-        <label>Servings</label>
+        <label id="recipe-servings">Servings</label>
         <input
           type="number"
+          aria-labelledby="recipe-servings"
           name="servings"
           onChange={ handleInputChange }
           value={ inputs.servings || "" }
           required />
-        <label>Instructions</label>
+        <label id="recipe-instructions">Instructions</label>
         <input
           type="text"
+          aria-labelledby="recipe-instructions"
           name="instructions"
           onChange={ handleInputChange }
           value={ inputs.instructions || "" }
