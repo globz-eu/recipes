@@ -16,6 +16,11 @@
   "engines": {
     "node": "12.11.0"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>__tests__/setup.js"
+    ]
+  },
   "dependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.5",
