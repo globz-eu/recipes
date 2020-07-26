@@ -12,6 +12,7 @@ export default () => {
     updateData(setData)
   }, ["config.json"])
 
+
   return (
     <div>
       {
@@ -27,7 +28,7 @@ export default () => {
         data &&
         <RecipeForm
           onSubmit={ formData =>
-            submitRecipe(formData, data.config.backend, () => updateData(setData))
+            submitRecipe(formData, data, updateData, setData)
           } />
       }
     </div>
