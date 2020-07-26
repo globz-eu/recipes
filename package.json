@@ -3,7 +3,6 @@
   "version": "0.3.4",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "scripts": {
     "lint": "eslint src __tests__",
     "start": "npm run build && http-server -c0 dist",
@@ -33,6 +32,7 @@
     "http-server": "^0.12.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.1.0",
     "styled-components": "^5.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"

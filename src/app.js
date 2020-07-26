@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import updateData from "./updateData"
+import submitRecipe from "./submitRecipe"
 import Recipe from "./components/recipe"
 import RecipeForm from "./components/recipeForm"
 
@@ -25,8 +26,9 @@ export default () => {
       {
         data &&
         <RecipeForm
-          updateData={ () => updateData(setData) }
-          backend={ data.config.backend } />
+          onSubmit={ formData =>
+            submitRecipe(formData, data.config.backend, () => updateData(setData))
+          } />
       }
     </div>
   )
