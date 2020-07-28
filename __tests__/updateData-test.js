@@ -1,16 +1,28 @@
-import axios from "axios"
+import { rest } from "msw"
+import { setupServer } from "msw/node"
 import updateData, { getData } from "../src/updateData"
 import recipes from "../testData/recipes.json"
 
-const config = { backend: "http://localhost:8000/recipes/" }
+const config = { backend: "https://recipes.eu/recipes" }
+
+const server = setupServer(
+  rest.get("/config.json", (req, res, ctx) => res(
+    ctx.json(config), ctx.status(200),
+  )),
+  rest.get(config.backend, (req, res, ctx) => res(
+    ctx.json(recipes), ctx.status(200),
+  )),
+)
+
+beforeAll(() => {
+  server.listen()
+})
+
+afterAll(() => {
+  server.close()
+})
 
 describe("getData", () => {
-  beforeEach(() => {
-    axios.get = jest.fn()
-      .mockResolvedValueOnce({ data: config })
-      .mockResolvedValueOnce({ data: recipes })
-  })
-
   it("returns the expected data", async () => {
     const data = await getData()
     expect(data).toEqual({ config, recipes })
@@ -18,12 +30,6 @@ describe("getData", () => {
 })
 
 describe("updateData", () => {
-  beforeEach(() => {
-    axios.get = jest.fn()
-      .mockResolvedValueOnce({ data: config })
-      .mockResolvedValueOnce({ data: recipes })
-  })
-
   it("calls the callback with the expected data", async () => {
     const mockCallback = jest.fn(data => data)
     await updateData(mockCallback)
