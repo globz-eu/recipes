@@ -9,6 +9,21 @@ const server = setupServer(
   rest.get("/config.json", (req, res, ctx) => res(
     ctx.json(config), ctx.status(200),
   )),
+  rest.get("/recipes-data/index.json", (req, res, ctx) => res(
+    ctx.json([
+      "data/lekker.json",
+      "data/pas_mal.json"
+    ]),
+    ctx.status(200),
+  )),
+  rest.get("/recipes-data/data/lekker.json", (req, res, ctx) => res(
+    ctx.json(recipes[0]),
+    ctx.status(200),
+  )),
+  rest.get("/recipes-data/data/pas_mal.json", (req, res, ctx) => res(
+    ctx.json(recipes[1]),
+    ctx.status(200),
+  )),
   rest.get(config.backend, (req, res, ctx) => res(
     ctx.json(recipes), ctx.status(200),
   )),
@@ -26,6 +41,20 @@ describe("getData", () => {
   it("returns the expected data", async () => {
     const data = await getData()
     expect(data).toEqual({ config, recipes })
+  })
+
+  it("returns the expected local data", async () => {
+    const localConfig = {
+      backend: "local",
+      recipesData: "recipes-data"
+    }
+    server.use(
+      rest.get("/config.json", (req, res, ctx) => res.once(
+        ctx.json(localConfig), ctx.status(200),
+      )),
+    )
+    const data = await getData()
+    expect(data).toEqual({ config: localConfig, recipes })
   })
 })
 
