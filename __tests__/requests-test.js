@@ -1,21 +1,35 @@
-import axios from "axios"
+import { rest } from "msw"
+import { setupServer } from "msw/node"
 import { getFromUrl, postToUrl } from "../src/requests"
 
 const config = { backend: "http://localhost:8000/recipes/" }
 
+const server = setupServer(
+  rest.get("/config.json", (req, res, ctx) => res(
+    ctx.json(config),
+  )),
+)
+
 describe("getFromUrl", () => {
-  beforeEach(() => {
-    axios.get = jest.fn().mockResolvedValue({ data: config })
+  beforeAll(() => {
+    server.listen()
+  })
+
+  afterAll(() => {
+    server.close()
   })
 
   it("returns the correct data", async () => {
     const response = await getFromUrl("config.json")
     expect(response).toEqual(config)
-    expect(axios.get).toBeCalledWith("config.json")
   })
 
   it("catches errors", async () => {
-    axios.get.mockRejectedValue()
+    server.use(
+      rest.get("/config.json", (req, res, ctx) => res.once(
+        ctx.status(500),
+      )),
+    )
     const response = await getFromUrl("config.json")
     expect(response).toEqual(null)
   })
