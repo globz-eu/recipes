@@ -4,6 +4,7 @@ node_js:
 
 jobs:
   include:
+    - script: npm run lint
     - script: npm test
     - stage: deploy
       script: npm run release
