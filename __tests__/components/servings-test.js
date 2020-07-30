@@ -1,8 +1,8 @@
-import { shallow } from "enzyme"
+import { render, screen } from "@testing-library/react"
 import React from "react"
 import Servings from "../../src/components/servings"
 
 test("Servings component displays servings number", () => {
-  const servings = shallow(<Servings servings={ 3 } />)
-  expect(servings).toHaveText("3 servings")
+  render(<Servings servings={ 3 } />)
+  expect(screen.getByText("3 servings")).toBeInTheDocument()
 })

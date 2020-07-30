@@ -1,9 +1,13 @@
 {
-  "extends": "artcom-react",
+  "extends": ["plugin:jest/recommended", "artcom-react"],
   "parser": "babel-eslint",
   "settings": {
     "react": {
       "version": "detect"
     }
+  },
+  "plugins": ["jest"],
+  "env": {
+    "jest/globals": true
   }
 }

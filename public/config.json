@@ -1,4 +1,4 @@
 {
-    "backend": "local",
+    "backend": "static",
     "recipesData": "recipes"
 }

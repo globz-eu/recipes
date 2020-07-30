@@ -1,33 +1,40 @@
-import axios from "axios"
-import { shallow } from "enzyme"
+import { render, fireEvent, waitFor, screen } from "@testing-library/react"
 import React from "react"
 import RecipeForm from "../../src/components/recipeForm"
 
 describe("RecipeForm", () => {
   it("contains the expected elements", () => {
-    const updateData = jest.fn()
-    const backend = "http://127.0.0.1:8080/recipes/"
-    const recipeForm = shallow(<RecipeForm updateData={ updateData } backend={ backend } />)
-    expect(recipeForm.find("input").at(0).prop("name")).toEqual("name")
-    expect(recipeForm.find("input").at(1).prop("name")).toEqual("servings")
-    expect(recipeForm.find("input").at(2).prop("name")).toEqual("instructions")
+    render(<RecipeForm onSubmit={ () => {} } />)
+    expect(screen.getByLabelText("Title")).toBeInTheDocument()
+    expect(screen.getByLabelText("Servings")).toBeInTheDocument()
+    expect(screen.getByLabelText("Instructions")).toBeInTheDocument()
   })
 
-  it("submits the expected data", () => {
-    const updateData = jest.fn()
-    const backend = "http://127.0.0.1:8080/recipes/"
-    axios.post = jest.fn().mockResolvedValue({})
-    const persist = jest.fn()
-    const recipeForm = shallow(<RecipeForm updateData={ updateData } backend={ backend } />)
-    recipeForm.find("input").at(0)
-      .simulate("change", { target: { name: "title", value: "Lekker" }, persist })
-    recipeForm.find("input").at(1)
-      .simulate("change", { target: { name: "servings", value: 4 }, persist })
-    recipeForm.find("input").at(2)
-      .simulate("change", { target: { name: "instructions", value: "Stir well" }, persist })
-    recipeForm.find("form").at(0).simulate("submit")
-    expect(axios.post.mock.calls.length).toBe(1)
-    expect(axios.post.mock.calls[0][0])
-      .toEqual(backend, { title: "Lekker", servings: 4, instructions: "Stir well" })
+  it("contains the expected data", async () => {
+    render(<RecipeForm onSubmit={ () => {} } />)
+
+    fireEvent.change(screen.getByLabelText("Title"), { target: { value: "Lekker" } })
+    fireEvent.change(screen.getByLabelText("Servings"), { target: { value: 4 } })
+    fireEvent.change(screen.getByLabelText("Instructions"), { target: { value: "Stir well" } })
+    expect(screen.getByLabelText("Title")).toHaveValue("Lekker")
+    expect(screen.getByLabelText("Servings")).toHaveValue(4)
+    expect(screen.getByLabelText("Instructions")).toHaveValue("Stir well")
+  })
+
+  it("submits the expected data", async () => {
+    const onSubmit = jest.fn()
+    render(<RecipeForm onSubmit={ onSubmit } />)
+
+    fireEvent.change(screen.getByLabelText("Title"), { target: { value: "Lekker" } })
+    fireEvent.change(screen.getByLabelText("Servings"), { target: { value: 4 } })
+    fireEvent.change(screen.getByLabelText("Instructions"), { target: { value: "Stir well" } })
+    fireEvent.click(screen.getByText("Submit"))
+
+    await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1))
+    expect(onSubmit.mock.calls[0][0]).toStrictEqual({
+      instructions: "Stir well",
+      name: "Lekker",
+      servings: "4"
+    })
   })
 })

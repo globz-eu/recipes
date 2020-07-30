@@ -1,50 +1,47 @@
-import { shallow } from "enzyme"
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import React from "react"
 import App from "../src/app"
-import Recipe from "../src/components/recipe"
-import RecipeForm from "../src/components/recipeForm"
-import testRecipes from "../testData/recipes.json"
+import { server } from "../mockApi/api"
+import recipes from "../testData/recipes.json"
 
-jest.mock("../src/updateData")
+beforeAll(() => {
+  server.listen()
+})
+
+afterAll(() => {
+  server.close()
+})
 
 describe("App", () => {
-  let app
-  let useEffect
-
-  const mockUseEffect = () => {
-    useEffect.mockImplementationOnce(f => f())
-  }
-
   beforeEach(() => {
-    useEffect = jest.spyOn(React, "useEffect")
-
-    mockUseEffect()
-    app = shallow(<App />)
+    render(<App />)
   })
 
-  it("contains the expected number of Recipe components", () => {
-    expect(app).toContainMatchingElements(testRecipes.length, Recipe)
-  })
-
-  it("Recipe components have the expected title prop", () => {
-    testRecipes.forEach((recipe, i) => {
-      expect(app.find(Recipe).get(i).props.title).toEqual(recipe.name)
+  it("contains the expected recipe titles", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    recipes.forEach(recipe => {
+      expect(screen.getByText(recipe.name)).toBeInTheDocument()
     })
   })
 
-  it("Recipe components have the expected servings prop", () => {
-    testRecipes.forEach((recipe, i) => {
-      expect(app.find(Recipe).get(i).props.servings).toEqual(recipe.servings)
+  it("contains the expected servings numbers", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    recipes.forEach(recipe => {
+      expect(screen.getByText(`${recipe.servings} servings`)).toBeInTheDocument()
     })
   })
 
-  it("Recipe components have the expected instructions prop", () => {
-    testRecipes.forEach((recipe, i) => {
-      expect(app.find(Recipe).get(i).props.instructions).toEqual(recipe.instructions)
+  it("contains the expected instructions", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    recipes.forEach(recipe => {
+      expect(screen.getByText(recipe.instructions)).toBeInTheDocument()
     })
   })
 
-  it("contains a RecipeForm", () => {
-    expect(app).toContainMatchingElements(1, RecipeForm)
+  it("contains a recipe form", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    expect(screen.getByLabelText("Title")).toBeInTheDocument()
+    expect(screen.getByLabelText("Servings")).toBeInTheDocument()
+    expect(screen.getByLabelText("Instructions")).toBeInTheDocument()
   })
 })
