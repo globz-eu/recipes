@@ -1,12 +1,6 @@
 import { getFromUrl } from "./requests"
 
-export default async function updateData(setData) {
-  const data = await getData()
-  console.log(data)
-  setData(data)
-}
-
-export async function getData() {
+export default async () => {
   const config = await getFromUrl("config.json")
   if (config.backend === "local") {
     const index = await getFromUrl(`${config.recipesData}/index.json`)

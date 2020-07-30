@@ -1,11 +1,12 @@
 import { postToUrl } from "./requests"
+import getLatestData from "./getLatestData"
 
-export default async (formData, data, updateData, setData) => {
-  console.log([...data.recipes, formData])
-  if (data.config.backend !== "local") {
-    await postToUrl(data.config.backend, formData)
-    updateData(setData)
-  } else {
-    setData({ config: data.config, recipes: [...data.recipes, formData] })
-  }
+export async function submit(formData, backend, setData) {
+  await postToUrl(backend, formData)
+  const updatedData = await getLatestData()
+  setData(updatedData)
+}
+
+export function submitLocal(formData, config, recipes, setData) {
+  setData({ config, recipes: [...recipes, formData] })
 }

@@ -1,6 +1,6 @@
 import { rest } from "msw"
 import { setupServer } from "msw/node"
-import updateData, { getData } from "../src/updateData"
+import getLatestData from "../src/getLatestData"
 import recipes from "../testData/recipes.json"
 
 const config = { backend: "https://recipes.eu/recipes" }
@@ -37,9 +37,9 @@ afterAll(() => {
   server.close()
 })
 
-describe("getData", () => {
-  it("returns the expected data", async () => {
-    const data = await getData()
+describe("get:atestData", () => {
+  it("returns the expected API data", async () => {
+    const data = await getLatestData()
     expect(data).toEqual({ config, recipes })
   })
 
@@ -53,16 +53,7 @@ describe("getData", () => {
         ctx.json(localConfig), ctx.status(200),
       )),
     )
-    const data = await getData()
+    const data = await getLatestData()
     expect(data).toEqual({ config: localConfig, recipes })
-  })
-})
-
-describe("updateData", () => {
-  it("calls the callback with the expected data", async () => {
-    const mockCallback = jest.fn(data => data)
-    await updateData(mockCallback)
-    expect(mockCallback.mock.calls.length).toBe(1)
-    expect(mockCallback.mock.results[0].value).toEqual({ config, recipes })
   })
 })

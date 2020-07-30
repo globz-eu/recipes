@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import updateData from "./updateData"
-import submitRecipe from "./submitRecipe"
+import getLatestData from "./getLatestData"
+import { submitLocal, submit } from "./submitRecipe"
 import Recipe from "./components/recipe"
 import RecipeForm from "./components/recipeForm"
 
@@ -9,7 +9,12 @@ export default () => {
   const [data, setData] = useState(null)
 
   React.useEffect(() => {
-    updateData(setData)
+    async function updateData() {
+      const updatedData = await getLatestData()
+      console.log(updatedData)
+      setData(updatedData)
+    }
+    updateData()
   }, ["config.json"])
 
 
@@ -27,10 +32,16 @@ export default () => {
       {
         data &&
         <RecipeForm
-          onSubmit={ formData =>
-            submitRecipe(formData, data, updateData, setData)
-          } />
+          onSubmit={ getSubmit(data.config, data.recipes, setData) } />
       }
     </div>
   )
+}
+
+function getSubmit(config, recipes, setData) {
+  if (config.backend === "local") {
+    return formData => submitLocal(formData, config, recipes, setData)
+  } else {
+    return formData => submit(formData, config.backend, updateData, setData)
+  }
 }
