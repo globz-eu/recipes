@@ -1,4 +1,4 @@
-import { server, config } from "../mockApi/api"
+import { server, config } from "../mockApi/staticApi"
 import getLatestData from "../src/getLatestData"
 import recipes from "../testData/recipes.json"
 
@@ -11,7 +11,7 @@ afterAll(() => {
 })
 
 describe("getLatestData", () => {
-  it("returns the expected API data", async () => {
+  it("returns the expected local data", async () => {
     const data = await getLatestData()
     expect(data).toEqual({ config, recipes })
   })

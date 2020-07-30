@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import getLatestData from "./getLatestData"
-import { submitLocal, submit } from "./submitRecipe"
+import { submitStatic, submit } from "./submitRecipe"
 import Recipe from "./components/recipe"
 import RecipeForm from "./components/recipeForm"
 
@@ -39,8 +39,8 @@ export default () => {
 }
 
 function getSubmit(config, recipes, setData) {
-  if (config.backend === "local") {
-    return formData => submitLocal(formData, config, recipes, setData)
+  if (config.backend === "static") {
+    return formData => submitStatic(formData, config, recipes, setData)
   } else {
     return formData => submit(formData, config.backend, setData)
   }

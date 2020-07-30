@@ -1,18 +1,7 @@
 import { rest } from "msw"
-import { setupServer } from "msw/node"
+import { server, config } from "../mockApi/api"
+import newRecipe from "../testData/newRecipe.json"
 import { getFromUrl, postToUrl } from "../src/requests"
-
-const config = { backend: "https://recipes.eu/recipes" }
-const data = { data: "data" }
-
-const server = setupServer(
-  rest.get("/config.json", (req, res, ctx) => res(
-    ctx.json(config), ctx.status(200),
-  )),
-  rest.post(config.backend, (req, res, ctx) => res(
-    ctx.json(data), ctx.status(201)
-  )),
-)
 
 beforeAll(() => {
   server.listen()
@@ -41,8 +30,8 @@ describe("getFromUrl", () => {
 
 describe("postToUrl", () => {
   it("returns the expected response", async () => {
-    const response = await postToUrl(config.backend, data)
-    expect(response).toEqual(data)
+    const response = await postToUrl(config.backend, newRecipe)
+    expect(response).toEqual(newRecipe)
   })
 
   it("catches errors", async () => {
@@ -51,7 +40,7 @@ describe("postToUrl", () => {
         ctx.status(400)
       ))
     )
-    const response = await postToUrl(config.backend, data)
+    const response = await postToUrl(config.backend, newRecipe)
     expect(response).toEqual(null)
   })
 })

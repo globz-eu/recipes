@@ -7,6 +7,6 @@ export async function submit(formData, backend, setData) {
   setData(updatedData)
 }
 
-export function submitLocal(formData, config, recipes, setData) {
+export function submitStatic(formData, config, recipes, setData) {
   setData({ config, recipes: [...recipes, formData] })
 }
