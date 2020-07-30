@@ -42,6 +42,6 @@ function getSubmit(config, recipes, setData) {
   if (config.backend === "local") {
     return formData => submitLocal(formData, config, recipes, setData)
   } else {
-    return formData => submit(formData, config.backend, updateData, setData)
+    return formData => submit(formData, config.backend, setData)
   }
 }
