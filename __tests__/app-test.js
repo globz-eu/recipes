@@ -1,19 +1,47 @@
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import React from "react"
 import App from "../src/app"
+import { server } from "../mockApi/api"
+import recipes from "../testData/recipes.json"
+
+beforeAll(() => {
+  server.listen()
+})
+
+afterAll(() => {
+  server.close()
+})
 
 describe("App", () => {
-  it("contains the expected number of Recipe components", () => {
+  beforeEach(() => {
+    render(<App />)
   })
 
-  it("Recipe components have the expected title prop", () => {
+  it("contains the expected recipe titles", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    recipes.forEach(recipe => {
+      expect(screen.getByText(recipe.name)).toBeInTheDocument()
+    })
   })
 
-  it("Recipe components have the expected servings prop", () => {
+  it("contains the expected servings numbers", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    recipes.forEach(recipe => {
+      expect(screen.getByText(`${recipe.servings} servings`)).toBeInTheDocument()
+    })
   })
 
-  it("Recipe components have the expected instructions prop", () => {
+  it("contains the expected instructions", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    recipes.forEach(recipe => {
+      expect(screen.getByText(recipe.instructions)).toBeInTheDocument()
+    })
   })
 
-  it("contains a RecipeForm", () => {
+  it("contains a recipe form", async () => {
+    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
+    expect(screen.getByLabelText("Title")).toBeInTheDocument()
+    expect(screen.getByLabelText("Servings")).toBeInTheDocument()
+    expect(screen.getByLabelText("Instructions")).toBeInTheDocument()
   })
 })

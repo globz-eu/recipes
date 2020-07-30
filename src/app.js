@@ -21,6 +21,9 @@ export default () => {
   return (
     <div>
       {
+        !data && <div>Loading ...</div>
+      }
+      {
         data && data.recipes.map((datum, i) =>
           <Recipe
             key={ i }
