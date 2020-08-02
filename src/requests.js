@@ -1,8 +1,12 @@
 import axios from "axios"
 
 
-export async function getFromUrl(url) {
-  const response = await axios.get(url).catch(error => new Error(error))
+export async function getFromUrl(url, accessToken) {
+  const response = await axios.get(
+    url,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }).catch(error => new Error(error))
   if (response instanceof Error) {
     console.error(response)
     return null
@@ -10,8 +14,13 @@ export async function getFromUrl(url) {
   return response.data
 }
 
-export async function postToUrl(url, data) {
-  const response = await axios.post(url, data).catch(error => new Error(error))
+export async function postToUrl(url, data, accessToken) {
+  const response = await axios.post(
+    url,
+    data,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }).catch(error => new Error(error))
   if (response instanceof Error) {
     console.error(response)
     return null

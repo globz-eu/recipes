@@ -1,16 +1,24 @@
 import React, { useState } from "react"
+import { useAuth0 } from "@auth0/auth0-react"
 import getLatestData from "./getLatestData"
 import { submitStatic, submit } from "./submitRecipe"
+import LoginButton from "./components/loginButton"
+import LogoutButton from "./components/logoutButton"
+import Profile from "./components/profile"
 import Recipe from "./components/recipe"
 import RecipeForm from "./components/recipeForm"
 
-
-export default () => {
+export default props => {
   const [data, setData] = useState(null)
+  const { getAccessTokenSilently } = useAuth0()
 
   React.useEffect(() => {
     async function updateData() {
-      const updatedData = await getLatestData()
+      const accessToken = await getAccessTokenSilently({
+        audience: props.config.auth0Audience,
+        scope: "read:recipes",
+      })
+      const updatedData = await getLatestData(props.config, accessToken)
       console.log(updatedData)
       setData(updatedData)
     }
@@ -20,6 +28,9 @@ export default () => {
 
   return (
     <div>
+      <LoginButton />
+      <LogoutButton />
+      <Profile />
       {
         !data && <div>Loading ...</div>
       }
@@ -35,16 +46,16 @@ export default () => {
       {
         data &&
         <RecipeForm
-          onSubmit={ getSubmit(data.config, data.recipes, setData) } />
+          onSubmit={ getSubmit(props.config, data.recipes, setData, getAccessTokenSilently) } />
       }
     </div>
   )
 }
 
-function getSubmit(config, recipes, setData) {
+function getSubmit(config, recipes, setData, getAccessTokenSilently) {
   if (config.backend === "static") {
     return formData => submitStatic(formData, config, recipes, setData)
   } else {
-    return formData => submit(formData, config.backend, setData)
+    return formData => submit(formData, config, setData, getAccessTokenSilently)
   }
 }
