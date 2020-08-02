@@ -12,7 +12,7 @@ afterAll(() => {
 
 describe("getLatestData", () => {
   it("returns the expected local data", async () => {
-    const data = await getLatestData()
+    const data = await getLatestData(config)
     expect(data).toEqual({ config, recipes })
   })
 })
