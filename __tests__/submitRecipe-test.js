@@ -16,12 +16,13 @@ describe("submit", () => {
   it("should submit the recipe passed from the form", async () => {
     const formData = newRecipe
     const mockSetData = jest.fn(data => data)
+    const mockGetAccessTokenSilently = jest.fn(() => "accessToken")
     server.use(
       rest.get(config.backend, (req, res, ctx) => res.once(
         ctx.json([...recipes, newRecipe]), ctx.status(200)
       ))
     )
-    await submit(formData, config.backend, mockSetData)
+    await submit(formData, config, mockSetData, mockGetAccessTokenSilently)
     expect(mockSetData.mock.calls[0][0]).toStrictEqual({ config, recipes: [...recipes, newRecipe] })
   })
 })
