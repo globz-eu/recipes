@@ -10,7 +10,7 @@ import RecipeForm from "./components/recipeForm"
 
 export default props => {
   const [data, setData] = useState(null)
-  const { getAccessTokenSilently } = useAuth0()
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
 
   React.useEffect(() => {
     async function updateData() {
@@ -28,11 +28,18 @@ export default props => {
 
   return (
     <div>
-      <LoginButton />
-      <LogoutButton />
+      {
+        !isAuthenticated && <LoginButton />
+      }
+      {
+        isAuthenticated && <LogoutButton />
+      }
       <Profile />
       {
-        !data && <div>Loading ...</div>
+        !data && isAuthenticated && <div>Loading ...</div>
+      }
+      {
+        !isAuthenticated && <div>Please log in ...</div>
       }
       {
         data && data.recipes.map((datum, i) =>
