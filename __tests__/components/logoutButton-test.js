@@ -5,7 +5,7 @@ import LogoutButton from "../../src/components/logoutButton"
 
 jest.mock("@auth0/auth0-react")
 
-describe("LoginButton", () => {
+describe("LogoutButton", () => {
   const mockLogout = jest.fn()
   const user = {
     email: "johndoe@me.com",
@@ -22,7 +22,7 @@ describe("LoginButton", () => {
     })
   })
 
-  it("calls loginWithRedirect when clicked", async () => {
+  it("calls logout when clicked", async () => {
     render(<LogoutButton />)
     fireEvent.click(screen.getByRole("button"))
 
