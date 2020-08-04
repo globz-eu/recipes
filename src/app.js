@@ -22,9 +22,10 @@ export default props => {
       console.log(updatedData)
       setData(updatedData)
     }
-    updateData()
+    if (isAuthenticated) {
+      updateData()
+    }
   }, ["config.json"])
-
 
   return (
     <div>
@@ -42,7 +43,7 @@ export default props => {
         !isAuthenticated && <div>Please log in ...</div>
       }
       {
-        data && data.recipes.map((datum, i) =>
+        data && data.recipes && data.recipes.map((datum, i) =>
           <Recipe
             key={ i }
             title={ datum.name }
@@ -51,7 +52,7 @@ export default props => {
         )
       }
       {
-        data &&
+        data && data.recipes &&
         <RecipeForm
           onSubmit={ getSubmit(props.config, data.recipes, setData, getAccessTokenSilently) } />
       }
