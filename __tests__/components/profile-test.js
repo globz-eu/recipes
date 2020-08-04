@@ -6,7 +6,6 @@ import Profile from "../../src/components/profile"
 jest.mock("@auth0/auth0-react")
 
 describe("Profile", () => {
-  const mockLogout = jest.fn()
   const user = {
     email: "johndoe@me.com",
     name: "John Doe",
@@ -17,9 +16,7 @@ describe("Profile", () => {
   beforeEach(() => {
     useAuth0.mockReturnValue({
       isAuthenticated: true,
-      user,
-      logout: mockLogout,
-      loginWithRedirect: jest.fn(),
+      user
     })
   })
 
