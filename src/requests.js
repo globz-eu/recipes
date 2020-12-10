@@ -1,12 +1,13 @@
 import axios from "axios"
 
 
-export async function getFromUrl(url, accessToken) {
+export async function getFromUrl(url, accessToken = null) {
   const response = await axios.get(
     url,
-    {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    }).catch(error => new Error(error))
+    accessToken != null
+      ? { headers: { Authorization: `Bearer ${accessToken}` } }
+      : {}
+  ).catch(error => new Error(error))
   if (response instanceof Error) {
     console.error(response)
     return null
@@ -14,13 +15,14 @@ export async function getFromUrl(url, accessToken) {
   return response.data
 }
 
-export async function postToUrl(url, data, accessToken) {
+export async function postToUrl(url, data, accessToken = null) {
   const response = await axios.post(
     url,
     data,
-    {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    }).catch(error => new Error(error))
+    accessToken != null
+      ? { headers: { Authorization: `Bearer ${accessToken}` } }
+      : {}
+  ).catch(error => new Error(error))
   if (response instanceof Error) {
     console.error(response)
     return null

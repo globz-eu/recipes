@@ -1,7 +1,5 @@
 {
     "backend": "static",
     "recipesData": "recipes",
-    "auth0Domain": "globz.eu.auth0.com",
-    "auth0ClientId": "zZvODAXp1DVCBzBDkUHl6NL7Xm8KybKt",
-    "auth0Audience": "https://recipes-backend"
+    "requireAuthentication": false
 }
