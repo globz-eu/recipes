@@ -15,6 +15,7 @@ async function getConfig() {
 
 async function renderApp() {
   const config = await getConfig()
+
   ReactDOM.render(
     <Auth0Provider
       domain={ config.auth0Domain }
