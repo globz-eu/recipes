@@ -25,7 +25,7 @@ export default props => {
     if (isAuthenticated) {
       updateData()
     }
-  }, ["config.json"])
+  }, [isAuthenticated])
 
   return (
     <div>
