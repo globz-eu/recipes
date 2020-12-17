@@ -1,10 +1,15 @@
 /* eslint-disable import/no-commonjs */
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const CopyPlugin = require("copy-webpack-plugin")
+const path = require("path")
 
-module.exports = (env = {}) => ({
-  mode: env.production ? "production" : "development",
-  devtool: env.production ? "source-map" : "eval-source-map",
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  devServer: {
+    contentBase: "./dist",
+  },
   module: {
     rules: [
       {
@@ -17,8 +22,4 @@ module.exports = (env = {}) => ({
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({ template: "src/index.html" }),
-    env.production ? () => {} : new CopyPlugin({ patterns: [{ from: "public", to: "" }] })
-  ]
-})
+}
