@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint src __tests__",
     "start": "npm run build && http-server -c0 dist",
-    "watch": "webpack serve",
+    "watch": "webpack serve --env development",
     "build": "webpack",
     "release": "./scripts/release",
     "test": "jest --coverage",
