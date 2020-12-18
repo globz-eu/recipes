@@ -12,7 +12,7 @@ afterAll(() => {
 
 describe("getLatestData", () => {
   it("returns the expected API data", async () => {
-    const data = await getLatestData(config, "accessToken")
-    expect(data).toEqual({ config, recipes })
+    const data = await getLatestData(config)
+    expect(data).toEqual({ recipes })
   })
 })
