@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 export async function getFromUrl(url, accessToken = null) {
   const response = await axios.get(
     url,
