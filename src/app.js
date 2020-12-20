@@ -12,20 +12,13 @@ export default props => {
     updateData()
   }, [props.config])
 
+  const submitData = formData =>
+    props.submit({ formData, config: props.config, setData, recipes: data.recipes })
+
   return (
     <div>
       <Loading loading={ data == null } />
-      <Page
-        data={ data }
-        submitData={
-          formData =>
-            props.submit({
-              formData,
-              config: props.config,
-              setData,
-              recipes: data.recipes
-            })
-        } />
+      <Page data={ data } submitData={ submitData } />
     </div>
   )
 }
