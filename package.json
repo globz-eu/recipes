@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint src __tests__",
-    "serve": "npm run build && http-server -c0 dist",
+    "serve": "http-server -c0 dist",
     "watch": "webpack serve --env development",
     "build": "webpack --env production",
     "release": "./scripts/release",
