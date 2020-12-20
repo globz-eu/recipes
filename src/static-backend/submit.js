@@ -1,3 +1,3 @@
-export default (formData, config, recipes, setData) => {
+export default ({ formData, config, setData, recipes }) => {
   setData({ config, recipes: [...recipes, formData] })
 }

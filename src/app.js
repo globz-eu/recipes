@@ -1,13 +1,11 @@
 import React, { useState } from "react"
-import getLatestData from "./getLatestData"
-import Page from "../components/page"
-import submitStatic from "./submit"
+import Page from "./components/page"
 
 export default props => {
   const [data, setData] = useState(null)
   React.useEffect(() => {
     async function updateData() {
-      const updatedData = await getLatestData(props.config.recipesData)
+      const updatedData = await props.getLatestData(props.config.backend)
       setData({ ...updatedData, config: props.config })
     }
     updateData()
@@ -17,6 +15,14 @@ export default props => {
     <Page
       config={ props.config }
       data={ data }
-      submitData={ formData => submitStatic(formData, props.config, data.recipes, setData) } />
+      submitData={
+        formData =>
+          props.submit({
+            formData,
+            config: props.config,
+            setData,
+            recipes: data.recipes
+          })
+      } />
   )
 }

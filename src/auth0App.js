@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
-import getLatestData from "./getLatestData"
-import Page from "../components/page"
-import submitStatic from "./submit"
+import Page from "./components/page"
 
 export default props => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0()
@@ -14,7 +12,7 @@ export default props => {
         audience: props.config.auth0Audience,
         scope: "read:recipes",
       })
-      const updatedData = await getLatestData(props.config.recipesData, accessToken)
+      const updatedData = await props.getLatestData(props.config.backend, accessToken)
       setData({ ...updatedData, config: props.config, getAccessTokenSilently })
     }
     if (isAuthenticated) {
@@ -26,7 +24,15 @@ export default props => {
     <Page
       config={ props.config }
       data={ data }
-      submitData={ formData => submitStatic(formData, props.config, data.recipes, setData) }
+      submitData={
+        formData =>
+          props.submit({
+            formData,
+            config: props.config,
+            setData,
+            recipes: data.recipes
+          })
+      }
       isAuthenticated={ isAuthenticated } />
   )
 }
