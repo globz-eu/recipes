@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Loading from "./components/loading"
 import Page from "./components/page"
 
 export default props => {
@@ -12,17 +13,19 @@ export default props => {
   }, [props.config])
 
   return (
-    <Page
-      config={ props.config }
-      data={ data }
-      submitData={
-        formData =>
-          props.submit({
-            formData,
-            config: props.config,
-            setData,
-            recipes: data.recipes
-          })
-      } />
+    <div>
+      <Loading loading={ data == null } />
+      <Page
+        data={ data }
+        submitData={
+          formData =>
+            props.submit({
+              formData,
+              config: props.config,
+              setData,
+              recipes: data.recipes
+            })
+        } />
+    </div>
   )
 }

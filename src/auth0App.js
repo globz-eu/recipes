@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
+import Authentication from "./components/authentication"
+import Loading from "./components/loading"
 import Page from "./components/page"
 
 export default props => {
@@ -21,18 +23,20 @@ export default props => {
   }, [isAuthenticated])
 
   return (
-    <Page
-      config={ props.config }
-      data={ data }
-      submitData={
-        formData =>
-          props.submit({
-            formData,
-            config: props.config,
-            setData,
-            recipes: data.recipes
-          })
-      }
-      isAuthenticated={ isAuthenticated } />
+    <div>
+      <Authentication isAuthenticated={ isAuthenticated } />
+      <Loading loading={ isAuthenticated && data === undefined } />
+      <Page
+        data={ data }
+        submitData={
+          formData =>
+            props.submit({
+              formData,
+              config: props.config,
+              setData,
+              recipes: data.recipes
+            })
+        } />
+    </div>
   )
 }
