@@ -12,13 +12,16 @@ const RestBackend = loadable(() => import("./restBackend"), {
   fallback: <Loading loading />
 })
 
+const backends = {
+  static: props => <StaticBackend { ...props } />,
+  rest: props => <RestBackend { ...props } />
+}
+
 async function renderApp() {
   const config = await getConfig()
 
   ReactDOM.render(
-    config.backendType === "static"
-      ? <StaticBackend config={ config } />
-      : <RestBackend config={ config } />,
+    backends[config.backendType]({ config }),
     document.getElementById("app")
   )
 }
