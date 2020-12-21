@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
-import Authentication from "./components/authentication"
-import Loading from "./components/loading"
-import Page from "./components/page"
+import Authentication from "../components/authentication"
+import Loading from "../components/loading"
+import Page from "../components/page"
 
 export default props => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0()

@@ -1,5 +1,5 @@
 {
-    "backend": "static",
-    "recipesData": "recipes",
-    "requireAuthentication": false
+    "backend": "recipes-data",
+    "backendType": "static",
+    "auth0": false
 }
