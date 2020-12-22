@@ -1,6 +1,6 @@
 import { rest } from "msw"
 import { server, config } from "../mockApi/api"
-import { submit } from "../src/submitRecipe"
+import submit from "../src/restBackend/submit"
 import recipes from "../testData/recipes.json"
 import newRecipe from "../testData/newRecipe.json"
 
@@ -22,7 +22,12 @@ describe("submit", () => {
         ctx.json([...recipes, newRecipe]), ctx.status(200)
       ))
     )
-    await submit(formData, config, mockSetData, mockGetAccessTokenSilently)
-    expect(mockSetData.mock.calls[0][0]).toStrictEqual({ config, recipes: [...recipes, newRecipe] })
+    await submit({
+      formData,
+      config,
+      setData: mockSetData,
+      getAccessTokenSilently: mockGetAccessTokenSilently
+    })
+    expect(mockSetData.mock.calls[0][0]).toStrictEqual({ recipes: [...recipes, newRecipe] })
   })
 })
