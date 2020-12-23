@@ -1,10 +1,10 @@
 import { render, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import React from "react"
-import App from "../src/app"
-import getLatestData from "../src/restBackend/getLatestData"
-import submit from "../src/restBackend/submit"
-import { server, config } from "../mockApi/api"
-import recipes from "../testData/recipes.json"
+import App from "../../src/app"
+import getLatestData from "../../src/restBackend/getLatestData"
+import submit from "../../src/restBackend/submit"
+import { server, config } from "../../mockApi/api"
+import recipes from "../../testData/recipes.json"
 
 jest.mock("@auth0/auth0-react")
 

@@ -1,6 +1,6 @@
-import { server, config } from "../mockApi/staticApi"
-import getLatestData from "../src/staticBackend/getLatestData"
-import recipes from "../testData/recipes.json"
+import { server, config } from "../../mockApi/staticApi"
+import getLatestData from "../../src/staticBackend/getLatestData"
+import recipes from "../../testData/recipes.json"
 
 beforeAll(() => {
   server.listen()

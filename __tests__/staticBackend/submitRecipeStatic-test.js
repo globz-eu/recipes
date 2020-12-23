@@ -1,7 +1,7 @@
-import submit from "../src/staticBackend/submit"
-import { config } from "../mockApi/staticApi"
-import recipes from "../testData/recipes.json"
-import newRecipe from "../testData/newRecipe.json"
+import submit from "../../src/staticBackend/submit"
+import { config } from "../../mockApi/staticApi"
+import recipes from "../../testData/recipes.json"
+import newRecipe from "../../testData/newRecipe.json"
 
 describe("submit static", () => {
   it("should store the new data", async () => {

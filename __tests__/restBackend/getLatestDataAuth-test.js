@@ -1,6 +1,6 @@
-import { server, config } from "../mockApi/authApi"
-import getLatestData from "../src/restBackend/getLatestData"
-import recipes from "../testData/recipes.json"
+import { server, config } from "../../mockApi/authApi"
+import getLatestData from "../../src/restBackend/getLatestData"
+import recipes from "../../testData/recipes.json"
 
 beforeAll(() => {
   server.listen()
