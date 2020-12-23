@@ -25,7 +25,7 @@ export default props => {
   return (
     <div>
       <Authentication isAuthenticated={ isAuthenticated } />
-      <Loading loading={ isAuthenticated && data === undefined } />
+      <Loading loading={ isAuthenticated && (data === undefined || data == null) } />
       <Page
         data={ data }
         submitData={
