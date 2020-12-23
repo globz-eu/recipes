@@ -3,8 +3,8 @@ import { setupServer } from "msw/node"
 import recipes from "../testData/recipes.json"
 
 export const config = {
-  backend: "static",
-  recipesData: "recipes-data"
+  backend: "recipes-data",
+  backendType: "static"
 }
 
 export const server = setupServer(
