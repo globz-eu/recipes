@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - '14.7.0'
+  - '15.4.0'
 
 jobs:
   include:
+    - script: npm install
     - script: npm run lint
     - script: npm test
     - stage: deploy

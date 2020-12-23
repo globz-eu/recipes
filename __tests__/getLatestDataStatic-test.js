@@ -1,5 +1,5 @@
 import { server, config } from "../mockApi/staticApi"
-import getLatestData from "../src/getLatestData"
+import getLatestData from "../src/staticBackend/getLatestData"
 import recipes from "../testData/recipes.json"
 
 beforeAll(() => {
@@ -12,7 +12,7 @@ afterAll(() => {
 
 describe("getLatestData", () => {
   it("returns the expected local data", async () => {
-    const data = await getLatestData()
-    expect(data).toEqual({ config, recipes })
+    const data = await getLatestData(config.backend)
+    expect(data).toEqual({ recipes })
   })
 })
