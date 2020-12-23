@@ -1,10 +1,12 @@
 [
   {
+    "id": 0,
     "name": "Lekker",
     "servings": 3,
     "instructions": "Stir well"
   },
   {
+    "id": 1,
     "name": "Pas mal",
     "servings": 2,
     "instructions": "Servir sur un lit de choucroute"

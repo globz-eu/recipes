@@ -9,9 +9,23 @@ export const server = setupServer(
   rest.get("/config.json", (req, res, ctx) => res(
     ctx.json(config), ctx.status(200),
   )),
-  rest.get(config.backend, (req, res, ctx) => res(
-    ctx.json(recipes), ctx.status(200)
-  )),
+  rest.get(config.backend, (req, res, ctx) => {
+    const recipesNames = recipes.map(recipe => ({ id: recipe.id, name: recipe.name }))
+    return (
+      res(
+        ctx.json(recipesNames), ctx.status(200)
+      )
+    )
+  }),
+  rest.get(`${config.backend}/:id`, (req, res, ctx) => {
+    const { id } = req.params
+    const recipePerId = recipes.find(recipe => recipe.id === id)
+    return (
+      res(
+        ctx.json(recipePerId), ctx.status(200)
+      )
+    )
+  }),
   rest.post(config.backend, (req, res, ctx) => res(
     ctx.json(newRecipe), ctx.status(201)
   )),
