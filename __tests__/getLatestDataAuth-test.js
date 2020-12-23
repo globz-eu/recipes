@@ -1,5 +1,5 @@
 import { server, config } from "../mockApi/authApi"
-import getLatestData from "../src/getLatestData"
+import getLatestData from "../src/restBackend/getLatestData"
 import recipes from "../testData/recipes.json"
 
 beforeAll(() => {
@@ -12,13 +12,13 @@ afterAll(() => {
 
 describe("getLatestData", () => {
   it("returns the expected API data", async () => {
-    const data = await getLatestData({ ...config, accessToken: "accessToken" })
+    const data = await getLatestData(config.backend, "accessToken")
     expect(data).toEqual({ recipes })
   })
 
   it("returns an error when unauthorized", async () => {
     await expect(
-      getLatestData({ ...config, accessToken: "invalidAccessToken" })
+      getLatestData(config.backend, "invalidAccessToken")
     ).rejects.toThrowError("403")
   })
 })

@@ -5,7 +5,7 @@ import newRecipe from "../testData/newRecipe.json"
 
 export const config = {
   backend: "https://recipes.eu/recipes",
-  requireAuthentication: true
+  auth0: true
 }
 
 export const server = setupServer(
