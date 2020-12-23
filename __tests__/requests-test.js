@@ -14,7 +14,8 @@ afterAll(() => {
 describe("getFromUrl", () => {
   it("returns the correct data", async () => {
     const response = await getFromUrl("config.json")
-    expect(response).toEqual(config)
+    expect(response.status).toEqual(200)
+    expect(response.data).toEqual(config)
   })
 
   it("catches errors", async () => {
@@ -24,14 +25,15 @@ describe("getFromUrl", () => {
       )),
     )
     const response = await getFromUrl("config.json")
-    expect(response).toEqual(null)
+    expect(response.status).toEqual(404)
   })
 })
 
 describe("postToUrl", () => {
   it("returns the expected response", async () => {
     const response = await postToUrl(config.backend, newRecipe)
-    expect(response).toEqual(newRecipe)
+    expect(response.status).toEqual(201)
+    expect(response.data).toEqual(newRecipe)
   })
 
   it("catches errors", async () => {
@@ -41,6 +43,6 @@ describe("postToUrl", () => {
       ))
     )
     const response = await postToUrl(config.backend, newRecipe)
-    expect(response).toEqual(null)
+    expect(response.status).toEqual(400)
   })
 })
