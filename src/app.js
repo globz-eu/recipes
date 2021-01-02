@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Loading from "./components/loading"
-import Page from "./components/page"
+import RecipeList from "./components/recipeList"
 
 export default props => {
   const [data, setData] = useState(null)
@@ -12,13 +12,10 @@ export default props => {
     updateData()
   }, [props.config])
 
-  const submitData = formData =>
-    props.submit({ formData, config: props.config, setData, recipes: data.recipes })
-
   return (
     <div>
       <Loading loading={ data == null } />
-      <Page data={ data } submitData={ submitData } />
+      <RecipeList data={ data } />
     </div>
   )
 }
