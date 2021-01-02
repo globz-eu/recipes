@@ -12,23 +12,28 @@ const App = loadable(() => import("../app"), {
   fallback: <Loading loading />
 })
 
-export default props =>
-  <>
-    {
-      props.config.auth0
-        ? ( // eslint-disable-line no-extra-parens
-          <Auth0App
-            config={ props.config }
-            getLatestData={ getLatestData }
-            getRecipeById={ getRecipeById }
-            submit={ submit } />
-        )
-        : ( // eslint-disable-line no-extra-parens
-          <App
-            config={ props.config }
-            getLatestData={ getLatestData }
-            getRecipeById={ getRecipeById }
-            submit={ submit } />
-        )
-    }
-  </>
+export default props => {
+  window.sessionStorage.clear()
+
+  return (
+    <>
+      {
+        props.config.auth0
+          ? ( // eslint-disable-line no-extra-parens
+            <Auth0App
+              config={ props.config }
+              getLatestData={ getLatestData }
+              getRecipeById={ getRecipeById }
+              submit={ submit } />
+          )
+          : ( // eslint-disable-line no-extra-parens
+            <App
+              config={ props.config }
+              getLatestData={ getLatestData }
+              getRecipeById={ getRecipeById }
+              submit={ submit } />
+          )
+      }
+    </>
+  )
+}
