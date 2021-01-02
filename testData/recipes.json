@@ -3,7 +3,33 @@
     "id": 0,
     "name": "Lekker",
     "servings": 3,
-    "instructions": "Stir well"
+    "instructions": "Stir well",
+    "ingredients": [
+      {
+        "ingredient": {
+          "name": "aubergine",
+          "plural": "aubergines"
+        },
+        "amount": {
+          "unit": {
+            "name":"piece"
+          },
+          "quantity": 2
+        }
+      },
+      {
+        "ingredient": {
+          "name": "garlic",
+          "plural":"garlic"
+        },
+        "amount": {
+          "unit": {
+            "name": "piece"
+          },
+          "quantity": 1
+        }
+      }
+    ]
   },
   {
     "id": 1,

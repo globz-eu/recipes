@@ -13,8 +13,9 @@ afterAll(() => {
 
 describe("getLatestData", () => {
   it("returns the expected API data", async () => {
+    const recipesNames = recipes.map(recipe => ({ id: recipe.id, name: recipe.name }))
     const response = await getLatestData(config.backend)
-    expect(response).toEqual({ recipes })
+    expect(response).toEqual({ recipes: recipesNames })
   })
 
   it("throws an error with the response status", async () => {

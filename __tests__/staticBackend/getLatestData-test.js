@@ -1,5 +1,5 @@
 import { server, config } from "../../mockApi/staticApi"
-import getLatestData from "../../src/staticBackend/getLatestData"
+import getLatestData, { getRecipeById } from "../../src/staticBackend/getLatestData"
 import recipes from "../../testData/recipes.json"
 
 beforeAll(() => {
@@ -12,7 +12,16 @@ afterAll(() => {
 
 describe("getLatestData", () => {
   it("returns the expected local data", async () => {
+    const recipesNames = recipes.map(recipe => ({ id: recipe.id, name: recipe.name }))
     const data = await getLatestData(config.backend)
-    expect(data).toEqual({ recipes })
+    expect(data).toEqual({ recipes: recipesNames })
+  })
+})
+
+describe("getRecipeById", () => {
+  it("returns the expected recipe data", async () => {
+    const recipe = recipes[0]
+    const data = await getRecipeById(config.backend, 0)
+    expect(data).toEqual(recipe)
   })
 })
