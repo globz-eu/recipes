@@ -2,7 +2,6 @@ import { getFromUrl } from "../requests"
 
 export default async (backend, accessToken = null) => {
   if (window.sessionStorage.getItem("recipes") == null) {
-    console.log("getting fresh data")
     const index = await getFromUrl(`${backend}/index.json`, accessToken)
     const recipesResponses = await Promise.all(
       index.data.map(
@@ -23,15 +22,8 @@ export default async (backend, accessToken = null) => {
   }
 }
 
-export async function getRecipeById(backend, id, accessToken = null) {
-  if (window.sessionStorage.getItem("recipes") == null) {
-    const index = await getFromUrl(`${backend}/index.json`, accessToken)
-    const path = index.data.find(recipe => recipe.id === id).path
-    const recipe = await getFromUrl(`${backend}/${path}`)
-    return recipe.data
-  } else {
-    const recipes = JSON.parse(window.sessionStorage.getItem("recipes"))
-    const requestedRecipe = recipes.find(recipe => recipe.id === id)
-    return requestedRecipe
-  }
+export async function getRecipeById(backend, id, accessToken = null) { // eslint-disable-line no-unused-vars, max-len
+  const recipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+  const requestedRecipe = recipes.find(recipe => recipe.id === id)
+  return requestedRecipe
 }
