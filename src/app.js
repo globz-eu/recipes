@@ -14,20 +14,27 @@ export default props => {
     updateData()
   }, [props.config])
 
+  const submitRecipe = formData =>
+    props.submit({ id: recipe.id, formData, config: props.config, setData, setRecipe })
+
   return (
     <div>
       <Loading loading={ data == null } />
       {
         recipe != null
-          ? <RecipeForm onSubmit={ () => {} } recipe={ recipe } onClose={ () => setRecipe(null) } />
+          ? ( // eslint-disable-line no-extra-parens
+            <RecipeForm
+              onSubmit={ submitRecipe }
+              recipe={ recipe }
+              onClose={ () => setRecipe(null) } />
+          )
           : ( // eslint-disable-line no-extra-parens
             <RecipeList
               data={ data }
               recipeDetail={
                 id =>
                   recipeDetail(id, props.getRecipeById, setRecipe, props.config)
-              }
-              onClose={ () => setRecipe(null) } />
+              } />
           )
       }
     </div>
@@ -35,6 +42,6 @@ export default props => {
 }
 
 async function recipeDetail(id, getRecipeById, setRecipe, config) {
-  const recipe = await getRecipeById(config.backend, id)
+  const recipe = await getRecipeById({ id, config })
   setRecipe(recipe)
 }

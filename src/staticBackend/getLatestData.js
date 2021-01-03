@@ -22,7 +22,7 @@ export default async (backend, accessToken = null) => {
   }
 }
 
-export async function getRecipeById(backend, id, accessToken = null) { // eslint-disable-line no-unused-vars, max-len
+export async function getRecipeById({ id, accessToken = null }) { // eslint-disable-line no-unused-vars, max-len
   const recipes = JSON.parse(window.sessionStorage.getItem("recipes"))
   const requestedRecipe = recipes.find(recipe => recipe.id === id)
   return requestedRecipe
