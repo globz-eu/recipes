@@ -3,11 +3,11 @@ import { config } from "../../mockApi/staticApi"
 import recipes from "../../testData/recipes.json"
 
 beforeEach(() => {
-  window.sessionStorage.setItem("recipes", JSON.stringify(recipes))
+  sessionStorage.setItem("recipes", JSON.stringify(recipes))
 })
 
 afterEach(() => {
-  window.sessionStorage.clear()
+  sessionStorage.clear()
 })
 
 describe("submit static", () => {
@@ -17,7 +17,7 @@ describe("submit static", () => {
     const mockSetData = jest.fn(data => data)
     const mockSetRecipe = jest.fn(r => r)
     submit({ id: 0, formData, config, setData: mockSetData, setRecipe: mockSetRecipe })
-    const storedRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+    const storedRecipes = JSON.parse(sessionStorage.getItem("recipes"))
     expect(storedRecipes.find(r => r.id === 0)).toEqual(formData)
   })
 
@@ -33,7 +33,7 @@ describe("submit static", () => {
   it("should update the recipe list in app", () => {
     const recipe = recipes[0]
     const formData = { ...recipe, name: "Lekkerrer" }
-    const storedRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+    const storedRecipes = JSON.parse(sessionStorage.getItem("recipes"))
     const updatedRecipes = [
       ...storedRecipes.filter(r => r.id !== 0),
       { ...formData, id: 0 }

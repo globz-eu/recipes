@@ -19,7 +19,7 @@ describe("getLatestData", () => {
 
   it("stores recipes in sessionStorage", async () => {
     await getLatestData(config.backend)
-    const storedRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+    const storedRecipes = JSON.parse(sessionStorage.getItem("recipes"))
     expect(storedRecipes).toEqual(recipes)
   })
 })

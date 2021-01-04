@@ -13,7 +13,7 @@ const App = loadable(() => import("../app"), {
 })
 
 export default props => {
-  window.sessionStorage.clear()
+  sessionStorage.clear()
 
   return (
     <>
