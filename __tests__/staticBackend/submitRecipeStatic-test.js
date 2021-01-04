@@ -1,16 +1,48 @@
 import submit from "../../src/staticBackend/submit"
 import { config } from "../../mockApi/staticApi"
 import recipes from "../../testData/recipes.json"
-import newRecipe from "../../testData/newRecipe.json"
+
+beforeEach(() => {
+  window.sessionStorage.setItem("recipes", JSON.stringify(recipes))
+})
+
+afterEach(() => {
+  window.sessionStorage.clear()
+})
 
 describe("submit static", () => {
-  it("should store the new data", async () => {
-    const formData = newRecipe
+  it("should update the current recipe in sessionStorage", () => {
+    const recipe = recipes[0]
+    const formData = { ...recipe, name: "Lekkerrer" }
     const mockSetData = jest.fn(data => data)
-    submit({ formData, config, recipes, setData: mockSetData })
-    expect(mockSetData.mock.calls[0][0]).toStrictEqual({
-      config,
-      recipes: [...recipes, newRecipe]
-    })
+    const mockSetRecipe = jest.fn(r => r)
+    submit({ id: 0, formData, config, setData: mockSetData, setRecipe: mockSetRecipe })
+    const storedRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+    expect(storedRecipes.find(r => r.id === 0)).toEqual(formData)
+  })
+
+  it("should update the current recipe in app", () => {
+    const recipe = recipes[0]
+    const formData = { ...recipe, name: "Lekkerrer" }
+    const mockSetData = jest.fn(data => data)
+    const mockSetRecipe = jest.fn(r => r)
+    submit({ id: 0, formData, config, setData: mockSetData, setRecipe: mockSetRecipe })
+    expect(mockSetRecipe.mock.calls[0][0]).toEqual(formData)
+  })
+
+  it("should update the recipe list in app", () => {
+    const recipe = recipes[0]
+    const formData = { ...recipe, name: "Lekkerrer" }
+    const storedRecipes = JSON.parse(window.sessionStorage.getItem("recipes"))
+    const updatedRecipes = [
+      ...storedRecipes.filter(r => r.id !== 0),
+      { ...formData, id: 0 }
+    ]
+    const updatedRecipeList = updatedRecipes.map(r => ({ id: r.id, name: r.name }))
+    const updatedData = { config, recipes: updatedRecipeList }
+    const mockSetData = jest.fn(data => data)
+    const mockSetRecipe = jest.fn(r => r)
+    submit({ id: 0, formData, config, setData: mockSetData, setRecipe: mockSetRecipe })
+    expect(mockSetData.mock.calls[0][0]).toEqual(updatedData)
   })
 })
