@@ -11,19 +11,24 @@ export default async (backend, accessToken = null) => {
     )
     const recipesWithId = recipesResponses.map(
       (recipe, i) =>
-        ({ ...recipe.data, id: index.data[i].id })
+        ({
+          recipe: { ...recipe.data.recipe, id: index.data[i].id },
+          ingredients: recipe.data.ingredients
+        })
     )
     sessionStorage.setItem("recipes", JSON.stringify(recipesWithId))
     const recipes = index.data.map(recipe => ({ id: recipe.id, name: recipe.name }))
     return { recipes }
   } else {
     const storedRecipes = JSON.parse(sessionStorage.getItem("recipes"))
-    return { recipes: storedRecipes.map(recipe => ({ id: recipe.id, name: recipe.name })) }
+    return {
+      recipes: storedRecipes.map(recipe => ({ id: recipe.recipe.id, name: recipe.recipe.name }))
+    }
   }
 }
 
 export async function getRecipeById({ id, accessToken = null }) { // eslint-disable-line no-unused-vars, max-len
   const recipes = JSON.parse(sessionStorage.getItem("recipes"))
-  const requestedRecipe = recipes.find(recipe => recipe.id === id)
+  const requestedRecipe = recipes.find(recipe => recipe.recipe.id === id)
   return requestedRecipe
 }

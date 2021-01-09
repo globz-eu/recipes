@@ -15,7 +15,7 @@ export default props => {
   }, [props.config])
 
   const submitRecipe = formData =>
-    props.submit({ id: recipe.id, formData, config: props.config, setData, setRecipe })
+    props.submit({ id: recipe.recipe.id, formData, config: props.config, setData, setRecipe })
 
   return (
     <div>

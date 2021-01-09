@@ -1,9 +1,11 @@
 [
   {
-    "id": 0,
-    "name": "Lekker",
-    "servings": 3,
-    "instructions": "Stir well",
+    "recipe": {
+      "id": 0,
+      "name": "Lekker",
+      "servings": 3,
+      "instructions": "Stir well"
+    },
     "ingredients": [
       {
         "ingredient": {
