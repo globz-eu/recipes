@@ -1,6 +1,6 @@
 import { rest } from "msw"
 import { server, config } from "../../mockApi/api"
-import getLatestData from "../../src/restBackend/getLatestData"
+import getLatestData, { getRecipeById } from "../../src/restBackend/getLatestData"
 import recipes from "../../testData/recipes.json"
 
 beforeAll(() => {
@@ -25,5 +25,13 @@ describe("getLatestData", () => {
       )),
     )
     await expect(getLatestData(config.backend)).rejects.toThrow("404")
+  })
+})
+
+describe("getRecipeById", () => {
+  it("returns the expected recipe data", async () => {
+    const recipe = recipes[0]
+    const data = await getRecipeById({ id: 0, config })
+    expect(data).toEqual(recipe)
   })
 })

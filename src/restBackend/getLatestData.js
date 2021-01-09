@@ -8,3 +8,13 @@ export default async (backend, accessToken = null) => {
     throw new Error(response.status)
   }
 }
+
+export async function getRecipeById({ id, config, accessToken = null }) {
+  const response = await getFromUrl(`${config.backend}/${id}`, accessToken)
+  if (response.status === 200) {
+    console.log(response.data)
+    return response.data.recipe
+  } else {
+    throw new Error(response.status)
+  }
+}
