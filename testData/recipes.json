@@ -34,9 +34,11 @@
     ]
   },
   {
-    "id": 1,
-    "name": "Pas mal",
-    "servings": 2,
-    "instructions": "Servir sur un lit de choucroute"
+    "recipe" : {
+      "id": 1,
+      "name": "Pas mal",
+      "servings": 2,
+      "instructions": "Servir sur un lit de choucroute"
+    }
   }
 ]
