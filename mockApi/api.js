@@ -22,7 +22,7 @@ export const server = setupServer(
     const recipePerId = recipes.find(recipeObject => recipeObject.recipe.id === Number(id))
     return (
       res(
-        ctx.json({ recipePerId }), ctx.status(200)
+        ctx.json({ ...recipePerId }), ctx.status(200)
       )
     )
   }),
