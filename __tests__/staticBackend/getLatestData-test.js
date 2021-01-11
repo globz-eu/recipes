@@ -12,7 +12,7 @@ afterAll(() => {
 
 describe("getLatestData", () => {
   it("returns the expected local data", async () => {
-    const recipeList = recipes.map(recipe => ({ id: recipe.id, name: recipe.name }))
+    const recipeList = recipes.map(r => ({ id: r.recipe.id, name: r.recipe.name }))
     const data = await getLatestData(config.backend)
     expect(data).toEqual({ recipes: recipeList })
   })
