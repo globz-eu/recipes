@@ -10,7 +10,10 @@ export const server = setupServer(
     ctx.json(config), ctx.status(200),
   )),
   rest.get(config.backend, (req, res, ctx) => {
-    const recipesNames = recipes.map(recipe => ({ id: recipe.id, name: recipe.name }))
+    const recipesNames = recipes.map(
+      recipe =>
+        ({ id: recipe.recipe.id, name: recipe.recipe.name })
+    )
     return (
       res(
         ctx.json(recipesNames), ctx.status(200)

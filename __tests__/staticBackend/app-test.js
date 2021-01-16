@@ -22,7 +22,7 @@ describe("App", () => {
   it("contains the expected recipe titles", async () => {
     await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
     recipes.forEach(recipe => {
-      expect(screen.getByText(recipe.name)).toBeInTheDocument()
+      expect(screen.getByText(recipe.recipe.name)).toBeInTheDocument()
     })
   })
 })
