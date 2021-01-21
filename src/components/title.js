@@ -6,5 +6,5 @@ const Title = styled.div`
   font-size: 1.5em;
 `
 
-export default props =>
-  <Title>{ props.title }</Title>
+export default ({ title, onClick }) =>
+  <Title onClick={ onClick }>{ title }</Title>

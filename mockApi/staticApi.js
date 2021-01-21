@@ -13,8 +13,8 @@ export const server = setupServer(
   )),
   rest.get("/recipes-data/index.json", (req, res, ctx) => res(
     ctx.json([
-      "data/lekker.json",
-      "data/pas_mal.json"
+      { path: "data/lekker.json", name: "Lekker", id: 0 },
+      { path: "data/pas_mal.json", name: "Pas mal", id: 1 }
     ]),
     ctx.status(200),
   )),

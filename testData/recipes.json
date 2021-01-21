@@ -1,12 +1,44 @@
 [
   {
-    "name": "Lekker",
-    "servings": 3,
-    "instructions": "Stir well"
+    "recipe": {
+      "id": 0,
+      "name": "Lekker",
+      "servings": 3,
+      "instructions": "Stir well"
+    },
+    "ingredients": [
+      {
+        "ingredient": {
+          "name": "aubergine",
+          "plural": "aubergines"
+        },
+        "amount": {
+          "unit": {
+            "name":"piece"
+          },
+          "quantity": 2
+        }
+      },
+      {
+        "ingredient": {
+          "name": "garlic",
+          "plural":"garlic"
+        },
+        "amount": {
+          "unit": {
+            "name": "piece"
+          },
+          "quantity": 1
+        }
+      }
+    ]
   },
   {
-    "name": "Pas mal",
-    "servings": 2,
-    "instructions": "Servir sur un lit de choucroute"
+    "recipe" : {
+      "id": 1,
+      "name": "Pas mal",
+      "servings": 2,
+      "instructions": "Servir sur un lit de choucroute"
+    }
   }
 ]

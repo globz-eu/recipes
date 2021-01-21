@@ -1,6 +1,6 @@
 import React from "react"
 import loadable from "@loadable/component"
-import getLatestData from "./getLatestData"
+import getLatestData, { getRecipeById } from "./getLatestData"
 import submit from "./submit"
 import Loading from "../components/loading"
 
@@ -16,7 +16,19 @@ export default props =>
   <>
     {
       props.config.auth0
-        ? <Auth0App config={ props.config } getLatestData={ getLatestData } submit={ submit } />
-        : <App config={ props.config } getLatestData={ getLatestData } submit={ submit } />
+        ? ( // eslint-disable-line no-extra-parens
+          <Auth0App
+            config={ props.config }
+            getLatestData={ getLatestData }
+            getRecipeById={ getRecipeById }
+            submit={ submit } />
+        )
+        : ( // eslint-disable-line no-extra-parens
+          <App
+            config={ props.config }
+            getLatestData={ getLatestData }
+            getRecipeById={ getRecipeById }
+            submit={ submit } />
+        )
     }
   </>

@@ -1,5 +1,14 @@
 {
-  "name": "Pas mal",
-  "servings": 2,
-  "instructions": "Servir sur un lit de choucroute"
+  "recipe": {
+    "name": "Pas mal",
+    "servings": 2,
+    "instructions": "Servir sur un lit de choucroute"
+  },
+  "ingredients": [
+    {
+      "name": "charcutaille",
+      "quantity": 2,
+      "unit": "piece"
+    }
+  ]
 }

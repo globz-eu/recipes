@@ -48,29 +48,8 @@ describe("Auth0App, when user is authenticated", () => {
   it("contains the expected recipe titles", async () => {
     await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
     recipes.forEach(recipe => {
-      expect(screen.getByText(recipe.name)).toBeInTheDocument()
+      expect(screen.getByText(recipe.recipe.name)).toBeInTheDocument()
     })
-  })
-
-  it("contains the expected servings numbers", async () => {
-    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
-    recipes.forEach(recipe => {
-      expect(screen.getByText(`${recipe.servings} servings`)).toBeInTheDocument()
-    })
-  })
-
-  it("contains the expected instructions", async () => {
-    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
-    recipes.forEach(recipe => {
-      expect(screen.getByText(recipe.instructions)).toBeInTheDocument()
-    })
-  })
-
-  it("contains a recipe form", async () => {
-    await waitForElementToBeRemoved(screen.queryByText("Loading ..."))
-    expect(screen.getByLabelText("Title")).toBeInTheDocument()
-    expect(screen.getByLabelText("Servings")).toBeInTheDocument()
-    expect(screen.getByLabelText("Instructions")).toBeInTheDocument()
   })
 })
 

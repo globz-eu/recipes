@@ -1,5 +1,19 @@
 {
-  "name": "Lekker",
-  "servings": 3,
-  "instructions": "Stir well"
+  "recipe": {
+    "name": "Lekker",
+    "servings": 3,
+    "instructions": "Stir well"
+  },
+  "ingredients": [
+    {
+      "name": "onion",
+      "quantity": 2,
+      "unit": "piece"
+    },
+    {
+      "name": "tomato",
+      "quantity": 2,
+      "unit": "can"
+    }
+  ]
 }

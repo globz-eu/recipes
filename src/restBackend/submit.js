@@ -1,7 +1,14 @@
-import { postToUrl } from "../requests"
+import { putToUrl } from "../requests"
 import getLatestData from "./getLatestData"
 
-export default async ({ formData, config, setData, getAccessTokenSilently = null }) => {
+export default async ({
+  id,
+  formData,
+  config,
+  setData,
+  setRecipe,
+  getAccessTokenSilently = null
+}) => {
   let accessToken = null
   if (config.auth0) {
     accessToken = await getAccessTokenSilently({
@@ -9,7 +16,13 @@ export default async ({ formData, config, setData, getAccessTokenSilently = null
       scope: "read:recipes create:recipes update:recipes",
     })
   }
-  await postToUrl(config.backend, formData, accessToken)
-  const updatedData = await getLatestData(config.backend, accessToken)
-  setData(updatedData)
+  const updatedRecipe = { recipe: formData }
+  const response = await putToUrl(`${config.backend}/${id}`, updatedRecipe, accessToken)
+  if (response.status === 204) {
+    const updatedData = await getLatestData(config.backend, accessToken)
+    setData(updatedData)
+    setRecipe(updatedRecipe)
+  } else {
+    throw new Error(response.status)
+  }
 }
