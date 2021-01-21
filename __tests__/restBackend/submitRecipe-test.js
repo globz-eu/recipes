@@ -2,7 +2,6 @@ import { rest } from "msw"
 import { server, config } from "../../mockApi/api"
 import submit from "../../src/restBackend/submit"
 import recipes from "../../testData/recipes.json"
-import newRecipe from "../../testData/newRecipe.json"
 
 beforeAll(() => {
   server.listen()
