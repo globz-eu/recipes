@@ -29,6 +29,11 @@ export const server = setupServer(
       )
     )
   }),
+  rest.put(`${config.backend}/:id`, (req, res, ctx) =>
+    res(
+      ctx.json({ ...req.body }), ctx.status(204)
+    )
+  ),
   rest.post(config.backend, (req, res, ctx) => res(
     ctx.json(newRecipe), ctx.status(201)
   )),
