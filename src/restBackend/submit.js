@@ -1,7 +1,14 @@
 import { putToUrl } from "../requests"
 import getLatestData from "./getLatestData"
 
-export default async ({ id, formData, config, setData, getAccessTokenSilently = null }) => {
+export default async ({
+  id,
+  formData,
+  config,
+  setData,
+  setRecipe,
+  getAccessTokenSilently = null
+}) => {
   let accessToken = null
   if (config.auth0) {
     accessToken = await getAccessTokenSilently({
@@ -14,6 +21,7 @@ export default async ({ id, formData, config, setData, getAccessTokenSilently = 
   if (response.status === 204) {
     const updatedData = await getLatestData(config.backend, accessToken)
     setData(updatedData)
+    setRecipe(updatedRecipe)
   } else {
     throw new Error(response.status)
   }
