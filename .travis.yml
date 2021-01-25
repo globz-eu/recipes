@@ -16,4 +16,6 @@ jobs:
         file_glob: true
         file: artifacts/*
         skip_cleanup: true
-      if: branch =~ /^v[0-9]+\.[0-9]+\.[0-9]+/
+        on:
+          repo: globz-eu/recipes
+          tags: true
