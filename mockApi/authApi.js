@@ -16,7 +16,7 @@ export const server = setupServer(
     if (req.headers.map.authorization === "Bearer accessToken") {
       const recipesNames = recipes.map(
         recipe =>
-          ({ id: recipe.recipe.id, name: recipe.recipe.name })
+          ({ id: recipe.id, name: recipe.name })
       )
       return res(
         ctx.json(recipesNames), ctx.status(200)
@@ -28,7 +28,7 @@ export const server = setupServer(
   rest.get(`${config.backend}/:id`, (req, res, ctx) => {
     if (req.headers.map.authorization === "Bearer accessToken") {
       const { id } = req.params
-      const recipePerId = recipes.find(recipe => recipe.recipe.id === id)
+      const recipePerId = recipes.find(recipe => recipe.id === id)
       return (
         res(
           ctx.json(recipePerId), ctx.status(200)

@@ -1,7 +1,5 @@
 {
-  "recipe": {
-    "name": "Miam",
-    "servings": 4,
-    "instructions": "Laisser mijoter longtemps"
-  }
+  "name": "Miam",
+  "servings": 4,
+  "instructions": "Laisser mijoter longtemps"
 }

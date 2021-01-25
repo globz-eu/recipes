@@ -12,7 +12,7 @@ export const server = setupServer(
   rest.get(config.backend, (req, res, ctx) => {
     const recipesNames = recipes.map(
       recipe =>
-        ({ id: recipe.recipe.id, name: recipe.recipe.name })
+        ({ id: recipe.id, name: recipe.name })
     )
     return (
       res(
@@ -22,7 +22,7 @@ export const server = setupServer(
   }),
   rest.get(`${config.backend}/:id`, (req, res, ctx) => {
     const { id } = req.params
-    const recipePerId = recipes.find(recipeObject => recipeObject.recipe.id === Number(id))
+    const recipePerId = recipes.find(recipe => recipe.id === Number(id))
     return (
       res(
         ctx.json({ ...recipePerId }), ctx.status(200)

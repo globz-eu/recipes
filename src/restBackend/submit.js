@@ -16,7 +16,7 @@ export default async ({
       scope: "read:recipes create:recipes update:recipes",
     })
   }
-  const updatedRecipe = { recipe: formData }
+  const updatedRecipe = { ...formData }
   const response = await putToUrl(`${config.backend}/${id}`, updatedRecipe, accessToken)
   if (response.status === 204) {
     const updatedData = await getLatestData(config.backend, accessToken)
