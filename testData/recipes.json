@@ -1,11 +1,9 @@
 [
   {
-    "recipe": {
-      "id": 0,
-      "name": "Lekker",
-      "servings": 3,
-      "instructions": "Stir well"
-    },
+    "id": 0,
+    "name": "Lekker",
+    "servings": 3,
+    "instructions": "Stir well",
     "ingredients": [
       {
         "ingredient": {
@@ -34,11 +32,9 @@
     ]
   },
   {
-    "recipe" : {
-      "id": 1,
-      "name": "Pas mal",
-      "servings": 2,
-      "instructions": "Servir sur un lit de choucroute"
-    }
+    "id": 1,
+    "name": "Pas mal",
+    "servings": 2,
+    "instructions": "Servir sur un lit de choucroute"
   }
 ]

@@ -14,7 +14,7 @@ export default ({ onSubmit, recipe, onClose }) => {
             type="text"
             aria-labelledby="recipe-name"
             name="name"
-            defaultValue={ recipe.recipe.name }
+            defaultValue={ recipe.name }
             ref={ register({ required: true }) } />
           { errors.name && "This field is required" }
           <label id="recipe-servings">Servings</label>
@@ -22,7 +22,7 @@ export default ({ onSubmit, recipe, onClose }) => {
             type="number"
             aria-labelledby="recipe-servings"
             name="servings"
-            defaultValue={ recipe.recipe.servings }
+            defaultValue={ recipe.servings }
             ref={ register({ required: true }) } />
           { errors.servings && "This field is required" }
           <label id="recipe-instructions">Instructions</label>
@@ -30,7 +30,7 @@ export default ({ onSubmit, recipe, onClose }) => {
             type="text"
             aria-labelledby="recipe-instructions"
             name="instructions"
-            defaultValue={ recipe.recipe.instructions }
+            defaultValue={ recipe.instructions }
             ref={ register({ required: true }) } />
           { errors.instructions && "This field is required" }
           <button type="submit">Submit</button>

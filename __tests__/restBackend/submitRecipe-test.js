@@ -14,8 +14,8 @@ afterAll(() => {
 describe("submit", () => {
   it("should update the recipe list in the app", async () => {
     const recipe = recipes[0]
-    const recipeList = recipes.map(r => ({ id: r.recipe.id, name: r.recipe.name }))
-    const formData = { ...recipe.recipe, name: "Lekkerrer" }
+    const recipeList = recipes.map(r => ({ id: r.id, name: r.name }))
+    const formData = { ...recipe, name: "Lekkerrer" }
     const updatedRecipeList = [
       ...recipeList.filter(r => r.id !== 0),
       { name: formData.name, id: 0 }
@@ -42,8 +42,8 @@ describe("submit", () => {
   describe("submit", () => {
     it("should update the current recipe in the app", async () => {
       const recipe = recipes[0]
-      const recipeList = recipes.map(r => ({ id: r.recipe.id, name: r.recipe.name }))
-      const formData = { ...recipe.recipe, name: "Lekkerrer" }
+      const recipeList = recipes.map(r => ({ id: r.id, name: r.name }))
+      const formData = { ...recipe, name: "Lekkerrer" }
       const updatedRecipeList = [
         ...recipeList.filter(r => r.id !== 0),
         { name: formData.name, id: 0 }
@@ -64,7 +64,7 @@ describe("submit", () => {
         setRecipe: mockSetRecipe,
         getAccessTokenSilently: mockGetAccessTokenSilently
       })
-      expect(mockSetRecipe.mock.calls[0][0].recipe).toEqual(formData)
+      expect(mockSetRecipe.mock.calls[0][0]).toEqual(formData)
     })
   })
 })
