@@ -1,5 +1,5 @@
-export default ({ id, formData, config, setData, setRecipe }) => {
-  const storedRecipes = JSON.parse(sessionStorage.getItem("recipes"))
+export default async ({ id, db, formData, config, setData, setRecipe }) => {
+  const storedRecipes = await db.getRecipes()
   const updatedRecipe = {
     ...formData,
     id,
@@ -9,7 +9,7 @@ export default ({ id, formData, config, setData, setRecipe }) => {
     ...storedRecipes.filter(recipe => recipe.id !== id),
     updatedRecipe
   ]
-  sessionStorage.setItem("recipes", JSON.stringify(updatedRecipes))
+  db.recipes.put(updatedRecipe)
   const updatedRecipeList = updatedRecipes.map(
     recipe =>
       ({ id: recipe.id, name: recipe.name })

@@ -8,14 +8,21 @@ export default props => {
   const [recipe, setRecipe] = useState(null)
   React.useEffect(() => {
     async function updateData() {
-      const updatedData = await props.getLatestData(props.config.backend)
+      const updatedData = await props.getLatestData({ backend: props.config.backend, db: props.db })
       setData({ ...updatedData, config: props.config })
     }
     updateData()
   }, [props.config])
 
   const submitRecipe = formData =>
-    props.submit({ id: recipe.recipe.id, formData, config: props.config, setData, setRecipe })
+    props.submit({
+      id: recipe.id,
+      formData,
+      config: props.config,
+      setData,
+      setRecipe,
+      db: props.db
+    })
 
   return (
     <div>
@@ -33,7 +40,7 @@ export default props => {
               data={ data }
               recipeDetail={
                 id =>
-                  recipeDetail(id, props.getRecipeById, setRecipe, props.config)
+                  recipeDetail(id, props.db, props.getRecipeById, setRecipe, props.config)
               } />
           )
       }
@@ -41,7 +48,7 @@ export default props => {
   )
 }
 
-async function recipeDetail(id, getRecipeById, setRecipe, config) {
-  const recipe = await getRecipeById({ id, config })
+async function recipeDetail(id, db, getRecipeById, setRecipe, config) {
+  const recipe = await getRecipeById({ id, db, config })
   setRecipe(recipe)
 }
