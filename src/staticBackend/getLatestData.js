@@ -2,7 +2,6 @@ import { getFromUrl } from "../requests"
 
 export default async ({ backend, db, accessToken = null }) => {
   const storedRecipes = await db.getRecipes()
-  console.log(storedRecipes)
   if (storedRecipes.length === 0) {
     const index = await getFromUrl(`${backend}/index.json`, accessToken)
     const recipesResponses = await Promise.all(
