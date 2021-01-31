@@ -14,7 +14,7 @@ afterAll(() => {
 describe("getLatestData", () => {
   it("returns the expected API data", async () => {
     const recipesNames = recipes.map(recipe => ({ id: recipe.id, name: recipe.name }))
-    const response = await getLatestData(config.backend)
+    const response = await getLatestData({ backend: config.backend })
     expect(response).toEqual({ recipes: recipesNames })
   })
 
@@ -24,7 +24,7 @@ describe("getLatestData", () => {
         ctx.status(404),
       )),
     )
-    await expect(getLatestData(config.backend)).rejects.toThrow("404")
+    await expect(getLatestData({ backend: config.backend })).rejects.toThrow("404")
   })
 })
 

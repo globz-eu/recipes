@@ -14,7 +14,7 @@ export default props => {
         audience: props.config.auth0Audience,
         scope: "read:recipes",
       })
-      const updatedData = await props.getLatestData(props.config.backend, accessToken)
+      const updatedData = await props.getLatestData({ backend: props.config.backend, accessToken })
       setData({ ...updatedData, config: props.config, getAccessTokenSilently })
     }
     if (isAuthenticated) {

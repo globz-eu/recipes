@@ -19,7 +19,7 @@ export default async ({
   const updatedRecipe = { ...formData }
   const response = await putToUrl(`${config.backend}/${id}`, updatedRecipe, accessToken)
   if (response.status === 204) {
-    const updatedData = await getLatestData(config.backend, accessToken)
+    const updatedData = await getLatestData({ backend: config.backend, accessToken })
     setData(updatedData)
     setRecipe(updatedRecipe)
   } else {

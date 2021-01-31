@@ -13,13 +13,13 @@ afterAll(() => {
 describe("getLatestData", () => {
   it("returns the expected API data", async () => {
     const recipesNames = recipes.map(recipe => ({ id: recipe.id, name: recipe.name }))
-    const data = await getLatestData(config.backend, "accessToken")
+    const data = await getLatestData({ backend: config.backend, accessToken: "accessToken" })
     expect(data).toEqual({ recipes: recipesNames })
   })
 
   it("returns an error when unauthorized", async () => {
     await expect(
-      getLatestData(config.backend, "invalidAccessToken")
+      getLatestData({ backend: config.backend, accessToekn: "invalidAccessToken" })
     ).rejects.toThrowError("403")
   })
 })
